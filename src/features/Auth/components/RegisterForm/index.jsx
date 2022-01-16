@@ -28,7 +28,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RegisterForm({ onSubmit }) {
-  const schema = yup.object({}).required();
+  const schema = yup
+    .object({
+      fullName: yup
+        .string()
+        .required("Please enter your name.")
+        .test(
+          "should has at least 2 words",
+          "Please enter at least two words",
+          (value) => {
+            // console.log(value);
+            return value.split(" ").length >= 2;
+          }
+        ),
+      email: yup
+        .string()
+        .required("Please enter your email address.")
+        .email("Please enter a valid email address"),
+      password: yup
+        .string()
+        .required("Please enter your password.")
+        .min(6, "Please enter at latest 6 characters."),
+      retypePassword: yup
+        .string()
+        .required("Please retype your password.")
+        .oneOf([yup.ref("password")], "Password does not match."),
+    })
+    .required();
 
   //
   const form = useForm({
