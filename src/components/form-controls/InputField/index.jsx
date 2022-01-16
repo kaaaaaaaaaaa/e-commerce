@@ -22,6 +22,8 @@ function InputField(props) {
       name={name} // is required
       control={form.control} // is required
       as={TextField}
+      margin="normal"
+      variant="outlined"
       label={label}
       disabled={disabled}
       fullWidth
