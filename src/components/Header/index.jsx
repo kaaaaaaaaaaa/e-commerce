@@ -1,22 +1,22 @@
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import { makeStyles } from "@material-ui/core/styles";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import EmojiNatureSharpIcon from "@material-ui/icons/EmojiNatureSharp";
-import Register from "features/Auth/components/Register";
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import AppBar from '@material-ui/core/AppBar';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import EmojiNatureSharpIcon from '@material-ui/icons/EmojiNatureSharp';
+import Register from 'features/Auth/components/Register';
+import React, { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   appBar: {
-    backgroundColor: "#bbb2e9",
+    backgroundColor: '#bbb2e9',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -25,11 +25,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   link: {
-    textDecoration: "none",
-    color: "#fff",
+    textDecoration: 'none',
+    color: '#fff',
   },
   logo: {
-    color: "#F3C301",
+    color: '#F3C301',
   },
 }));
 
@@ -77,7 +77,7 @@ function Header() {
         aria-labelledby="form-dialog-title"
       >
         <DialogContent>
-          <Register />
+          <Register handleCloseDialog={handleClose} />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
