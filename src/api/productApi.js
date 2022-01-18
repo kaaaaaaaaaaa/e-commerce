@@ -1,8 +1,8 @@
-import axiosClient from "./axiosClient";
+import axiosClient from './axiosClient';
 
 const productsApi = {
     getAll(params) {
-        const url = "/products";
+        const url = '/products';
         return axiosClient.get(url, { params: params });
     },
     get(id) {
@@ -10,7 +10,7 @@ const productsApi = {
         return axiosClient.get(url);
     },
     add(data) {
-        const url = "/products";
+        const url = '/products';
         return axiosClient.post(url, data);
     },
     update(data) {

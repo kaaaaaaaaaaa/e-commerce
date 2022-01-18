@@ -1,7 +1,7 @@
-import Header from "components/Header";
-import React, { useEffect } from "react";
-import productsApi from "./api/productApi";
-import "./App.css";
+import Header from 'components/Header';
+import React, { useEffect } from 'react';
+import productsApi from './api/productApi';
+import './App.css';
 
 function App() {
   useEffect(() => {
@@ -11,7 +11,7 @@ function App() {
       };
 
       const productsList = await productsApi.getAll(params);
-      console.log("products:", productsList);
+      console.log('products:', productsList);
     };
     fetchProducts();
   }, []);
