@@ -1,4 +1,4 @@
-import { Box, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Box, Divider, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Slide } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -73,6 +73,10 @@ function Header() {
 
   }
 
+  //
+  const handleClickUserInfo = () => {
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -82,6 +86,8 @@ function Header() {
   };
 
   const classes = useStyles();
+
+
 
   return (
     <div className={classes.root}>
@@ -129,7 +135,7 @@ function Header() {
         }}
         getContentAnchorEl={null}
       >
-        <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
+        <MenuItem onClick={handleClickUserInfo}>My account</MenuItem>
         <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
 
@@ -168,6 +174,8 @@ function Header() {
           )}
         </DialogContent>
       </Dialog>
+
+
     </div>
   );
 }
