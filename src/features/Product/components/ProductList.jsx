@@ -1,25 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { Box, Grid } from '@material-ui/core';
-import { Skeleton } from '@material-ui/lab';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Product from './Product';
 
-productList.propTypes = {
-  length: PropTypes.number,
-};
-productList.defaultProps = {
-  length: 6,
+ProductList.propTypes = {
+  data: PropTypes.array,
 };
 
-function productList({ length }) {
+ProductList.defaultProps = {
+  data: [],
+};
+
+function ProductList({ data }) {
   return (
     <Box>
       <Grid container>
-        {Array.from(new Array(length)).map((item, index) => (
-          <Grid item key={index} xs={12} sm={6} lg={3}>
-            <Box padding={1}>
-              <Product />
-            </Box>
+        {data.map((product) => (
+          <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+            <Product product={product} />
           </Grid>
         ))}
       </Grid>
@@ -27,4 +25,4 @@ function productList({ length }) {
   );
 }
 
-export default productList;
+export default ProductList;

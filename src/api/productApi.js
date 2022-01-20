@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient';
 
-const productsApi = {
-  getAll(params) {
+const productApi = {
+  async getAll(params) {
     // Transform _page to _start
     const newParams = { ...params };
     //add property _start to newParams
@@ -12,8 +12,12 @@ const productsApi = {
     // Remove un-needed ke
     delete newParams._page;
     // Fetch product list + count
-    const productList = axiosClient.get('/products', { params: newParams });
-    const count = axiosClient.get('/products/count', { params: newParams });
+    const productList = await axiosClient.get('/products', {
+      params: newParams,
+    });
+    const count = await axiosClient.get('/products/count', {
+      params: newParams,
+    });
 
     //
     return {
@@ -42,4 +46,4 @@ const productsApi = {
     return axiosClient.delete(url);
   },
 };
-export default productsApi;
+export default productApi;

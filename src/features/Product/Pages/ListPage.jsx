@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -9,10 +9,9 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
-import { useEffect } from 'react';
-import productsApi from 'api/productApi';
-import { useState } from 'react';
+import productApi from 'api/productApi';
 import ProductSkeletonList from '../components/ProductSkeletonList';
+import ProductList from '../components/ProductList';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -24,28 +23,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 function ListPage(props) {
+  const classes = useStyles();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   //c
-  console.log(loading);
   useEffect(() => {
     (async () => {
       try {
-        const { data } = await productsApi.getAll({
+        const response = await productApi.getAll({
           _page: 1,
-          _limit: 10,
+          _limit: 6,
         });
-        // console.log(data);
-        setProductList(data);
+        console.log(response);
+        setProductList(response.data);
       } catch (error) {
         console.log('Failed to fetch product list', error);
       }
-      //After fetch product from api
+
       setLoading(false);
     })();
   }, []);
 
-  const classes = useStyles();
   return (
     <div>
       <Box pt={3}>
@@ -59,9 +57,9 @@ function ListPage(props) {
             <Grid item className={classes.right}>
               <Paper variant="outlined" elevation={0}>
                 {loading ? (
-                  <ProductSkeletonList />
+                  <ProductSkeletonList length={6} />
                 ) : (
-                  <productList data={productList}>drvdvdd</productList>
+                  <ProductList data={productList} />
                 )}
               </Paper>
             </Grid>

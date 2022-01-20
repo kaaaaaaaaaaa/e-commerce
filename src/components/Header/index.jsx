@@ -1,4 +1,14 @@
-import { Box, Divider, IconButton, List, ListItem, ListItemText, Menu, MenuItem, Slide } from '@material-ui/core';
+import {
+  Box,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Slide,
+} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -42,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   avatar: {
-    margin: theme.spacing(0, 2)
-  }
+    margin: theme.spacing(0, 2),
+  },
 }));
 const MODE = {
   LOGIN: 'login',
@@ -69,13 +79,11 @@ function Header() {
   };
   // handleLogout
   const handleLogoutClick = () => {
-    dispatch(logout())
-
-  }
+    dispatch(logout());
+  };
 
   //
-  const handleClickUserInfo = () => {
-  };
+  const handleClickUserInfo = () => {};
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,8 +94,6 @@ function Header() {
   };
 
   const classes = useStyles();
-
-
 
   return (
     <div className={classes.root}>
@@ -106,19 +112,22 @@ function Header() {
           <NavLink className={classes.link} to="/album">
             <Button color="inherit">Album</Button>
           </NavLink>
-          {!isLoggedIn && (<Button color="inherit" onClick={handleClickOpen}>
-            Login
-          </Button>)}
+          {!isLoggedIn && (
+            <Button color="inherit" onClick={handleClickOpen}>
+              Login
+            </Button>
+          )}
           {isLoggedIn && (
-            <IconButton className={classes.avatar} color="inherit" onClick={handleClickUser}>
+            <IconButton
+              className={classes.avatar}
+              color="inherit"
+              onClick={handleClickUser}
+            >
               <AccountCircle />
             </IconButton>
           )}
-
-
         </Toolbar>
       </AppBar>
-
 
       <Menu
         anchorEl={anchorEl}
@@ -139,11 +148,9 @@ function Header() {
         <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
       </Menu>
 
-
-
       <Dialog
         disableEscapeKeyDown
-        disableBackdropClick
+        // disableBackdropClick
         open={open}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
@@ -174,8 +181,6 @@ function Header() {
           )}
         </DialogContent>
       </Dialog>
-
-
     </div>
   );
 }
