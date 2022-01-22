@@ -6,8 +6,11 @@ Product.propTypes = {};
 
 function Product(props) {
   const { product } = props;
+  // const thumbnailUrl = product.thumbnail
+  //   ? `${STATIC_HOST}${product.thumbnail?.url}`
+  //   : THUMBNAIL_PLACEHOLDER;
   const thumbnailUrl = product.thumbnail
-    ? `${STATIC_HOST}${product.thumbnail?.url}`
+    ? `${STATIC_HOST}${product.thumbnail && product.thumbnail.url}`
     : THUMBNAIL_PLACEHOLDER;
   return (
     <Box padding={1}>
@@ -15,7 +18,15 @@ function Product(props) {
         <img src={thumbnailUrl} alt={product.name} width="100%" />
       </Box>
       <Typography variant="body2">{product.name}</Typography>
-      <Typography variant="body2">{product.promotionPercent}</Typography>
+      <Typography variant="body2">
+        <Box component="span" fontSize="16px" fontWeight="bold" mr={1}>
+          {Intl.NumberFormat('vi-VN', {
+            style: 'currency',
+            currency: 'VND',
+          }).format(product.salePrice)}
+        </Box>
+        {product.promotionPercent > 0 ? ` -${product.promotionPercent}%` : ''}
+      </Typography>
     </Box>
   );
 }

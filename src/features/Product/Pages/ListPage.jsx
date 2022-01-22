@@ -12,6 +12,7 @@ import {
 import productApi from 'api/productApi';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductList from '../components/ProductList';
+import { Pagination } from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -25,25 +26,37 @@ const useStyles = makeStyles((theme) => ({
 function ListPage(props) {
   const classes = useStyles();
   const [productList, setProductList] = useState([]);
+  const [pagination, setPagination] = useState({
+    limit: 9,
+    total: 10,
+    page: 1, //current page
+  });
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({ _limit: 9, _page: 1 });
   //c
   useEffect(() => {
     (async () => {
       try {
-        const response = await productApi.getAll({
-          _page: 1,
-          _limit: 6,
-        });
-        console.log(response);
-        setProductList(response.data);
+        const { data, pagination } = await productApi.getAll(filters);
+        console.log({ data, pagination });
+        setProductList(data);
+        setPagination(pagination);
       } catch (error) {
         console.log('Failed to fetch product list', error);
       }
 
       setLoading(false);
     })();
-  }, []);
+  }, [filters]);
 
+  /// pagination
+  const handlepageChange = (e, page) => {
+    setFilters((preFilter) => ({
+      ...preFilter,
+      _page: page,
+    }));
+  };
+  //
   return (
     <div>
       <Box pt={3}>
@@ -57,10 +70,16 @@ function ListPage(props) {
             <Grid item className={classes.right}>
               <Paper variant="outlined" elevation={0}>
                 {loading ? (
-                  <ProductSkeletonList length={6} />
+                  <ProductSkeletonList length={9} />
                 ) : (
                   <ProductList data={productList} />
                 )}
+
+                <Pagination
+                  count={Math.ceil(pagination.total / pagination.limit)} // total page
+                  page={pagination.page} // current page
+                  onChange={handlepageChange}
+                />
               </Paper>
             </Grid>
           </Grid>
