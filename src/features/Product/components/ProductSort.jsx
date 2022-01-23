@@ -9,7 +9,6 @@ ProductSort.propTypes = {
 
 function ProductSort(props) {
   const { currentSort, onChange } = props;
-  console.log(currentSort);
 
   //
   const handleSortChange = (e, newValue) => {
