@@ -12,9 +12,9 @@ FilterByCategorySkeleton.defaultProps = {
 
 function FilterByCategorySkeleton({ length }) {
   return (
-    <Box padding={1}>
+    <Box>
       {Array.from(new Array(length)).map((item, index) => (
-        <Skeleton key={index} width="70%" />
+        <Skeleton key={index} width="70%" style={{ marginTop: '8px' }} />
       ))}
     </Box>
   );

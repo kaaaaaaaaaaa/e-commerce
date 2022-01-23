@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FilterByCategory from './Filters/FilterByCategory';
+import FilterByPrice from './Filters/FilterByPrice';
+import { makeStyles } from '@material-ui/core';
 
 productFilter.propTypes = {
   filters: PropTypes.object.isRequired,
@@ -10,7 +12,7 @@ productFilter.propTypes = {
 function productFilter({ filters, onChange }) {
   const handleCategoryChange = (categoryId) => {
     const newFilters = {
-      ...filters,
+      // ...filters,
       'category.id': categoryId,
     };
 
@@ -18,9 +20,15 @@ function productFilter({ filters, onChange }) {
       onChange(newFilters);
     }
   };
+  const handlePriceChange = (values) => {
+    if (onChange) {
+      onChange(values);
+    }
+  };
   return (
     <div>
       <FilterByCategory onChange={handleCategoryChange} />
+      <FilterByPrice onChange={handlePriceChange} />
     </div>
   );
 }

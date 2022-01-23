@@ -80,12 +80,12 @@ function ListPage(props) {
       <Container>
         <Grid container spacing={2}>
           <Grid item className={classes.left}>
-            <Paper variant="outlined" elevation={2}>
+            <Paper elevation={2}>
               <ProductFilter filters={filters} onChange={handleFiltersChange} />
             </Paper>
           </Grid>
           <Grid item className={classes.right}>
-            <Paper variant="" elevation={2}>
+            <Paper variant="outlined" elevation={2}>
               <ProductSort
                 currentSort={filters._sort}
                 onChange={handleSortChange}

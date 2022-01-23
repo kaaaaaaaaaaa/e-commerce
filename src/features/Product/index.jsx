@@ -5,13 +5,14 @@ import { useRouteMatch } from 'react-router-dom';
 import ListPage from './Pages/ListPage';
 
 function ProductFeature(props) {
-    const match = useRouteMatch()
-    return <div>ProductFeature
-        <Switch>
-            <Route path={match.url} component={ListPage} exact />
-        </Switch>
-
-    </div>;
+  const match = useRouteMatch();
+  return (
+    <div>
+      <Switch>
+        <Route path={match.url} component={ListPage} exact />
+      </Switch>
+    </div>
+  );
 }
 
 ProductFeature.propTypes = {};

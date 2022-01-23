@@ -1,9 +1,7 @@
-import { Switch, Redirect, Route } from 'react-router-dom';
 import Header from 'components/Header';
-import React, { useEffect } from 'react';
-import productsApi from './api/productApi';
-import './App.css';
 import ProductFeature from 'features/Product';
+import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 function App() {
   // useEffect(() => {

@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
   menu: {
     padding: '0',
     margin: '0',
+
     listStyleType: 'none',
     '&>li': {
       marginTop: theme.spacing(1),
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  title: { fontWeight: 'bold' },
 }));
 
 function FilterByCategory({ onChange }) {
@@ -53,7 +55,9 @@ function FilterByCategory({ onChange }) {
   };
   return (
     <Box className={classes.root}>
-      <Typography variant="subtitle2">DANH MỤC SẢN PHẨM </Typography>
+      <Typography variant="subtitle2" className={classes.title}>
+        DANH MỤC SẢN PHẨM
+      </Typography>
 
       {!loading && <FilterByCategorySkeleton length={6} />}
       <ul className={classes.menu}>
