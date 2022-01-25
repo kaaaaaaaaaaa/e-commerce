@@ -37,7 +37,7 @@ function FilterByCategory({ onChange }) {
     (async () => {
       try {
         const category = await categoriesApi.getAll();
-        console.log(category);
+        // console.log(category);
         // get category name
         setCategoryList(
           category.map((item) => ({ id: item.id, name: item.name }))
