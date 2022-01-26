@@ -72,32 +72,35 @@ const FILTER_LIST = [
     },
     onToggle: null,
   },
-  {
-    id: 4,
-    getLabel: (filters, categoryList) => {
-      console.log(categoryList);
-      let label;
-      label = categoryList.find((x) => x.id === filters['category.id']);
-      console.log(label.name);
-      return label.name;
-    },
+  // {
+  //   id: 4,
+  //   getLabel: (filters, categoryList) => {
+  //     console.log(categoryList);
+  //     let label;
+  //     label = categoryList.find((x) => x.id === filters['category.id']);
+  //     // console.log(label.name);
+  //     return label.name;
+  //   },
 
-    isActive: () => true,
-    isVisible: (filters) => Object.keys(filters).includes('category.id'),
-    // Object.keys(filters).includes('salePrice_lte'),
+  //   isActive: () => true,
+  //   isVisible: (filters) => Object.keys(filters).includes('category.id'),
+  //   // Object.keys(filters).includes('salePrice_lte'),
 
-    isRemoveale: true,
-    onRemove: (filters) => {
-      const newFilters = { ...filters };
-      if (filters['category.id']) delete newFilters['category.id'];
-      return newFilters;
-    },
-    onToggle: null,
-  },
+  //   isRemoveale: true,
+  //   onRemove: (filters) => {
+  //     const newFilters = { ...filters };
+  //     if (filters['category.id']) delete newFilters['category.id'];
+  //     return newFilters;
+  //   },
+  //   onToggle: null,
+  // },
 ];
 
 function FilterViewer({ filters = {}, onChange = null }) {
+  const classes = useStyles();
+
   const [categoryList, setCategoryList] = useState([]);
+
   useEffect(() => {
     (async () => {
       const category = await categoriesApi.getAll();
@@ -107,9 +110,8 @@ function FilterViewer({ filters = {}, onChange = null }) {
         category.map((item) => ({ id: item.id, name: item.name }))
       );
     })();
+    return () => {};
   }, []);
-
-  const classes = useStyles();
 
   const visiableFilters = useMemo(() => {
     return FILTER_LIST.filter((x) => x.isVisible(filters));

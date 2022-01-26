@@ -1,8 +1,11 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box, Container, Grid, makeStyles, Paper } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
+import categoriesApi from 'api/categoryApi';
 import productApi from 'api/productApi';
+import queryString from 'query-string';
 import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import FilterViewer from '../components/FilterViewer';
 import ProductFilter from '../components/ProductFilter';
 import ProductList from '../components/ProductList';
@@ -28,19 +31,32 @@ const useStyles = makeStyles((theme) => ({
 
 function ListPage(props) {
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
   const [productList, setProductList] = useState([]);
+
+  const queryParams = queryString.parse(location.search);
   const [pagination, setPagination] = useState({
     limit: 9,
     total: 10,
     page: 1, //current page
   });
   const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({
-    _limit: 9,
-    _page: 1,
-    _sort: 'salePrice:ASC',
-  });
-  //c
+  const [filters, setFilters] = useState(() => ({
+    ...queryParams,
+    _page: Number(queryParams._page) || 1,
+    _limit: Number(queryParams._limit) || 9,
+    _sort: queryParams._sort || 'salePrice:ASC',
+  }));
+
+  // when filter change => set param url
+  useEffect(() => {
+    history.push({
+      pathname: history.location.pathname, // current PATHNAME
+      search: queryString.stringify(filters),
+    });
+  }, [history, filters]);
+
   useEffect(() => {
     (async () => {
       try {
@@ -48,6 +64,8 @@ function ListPage(props) {
         console.log({ data, pagination });
         setProductList(data);
         setPagination(pagination);
+
+        //
       } catch (error) {
         console.log('Failed to fetch product list', error);
       }
