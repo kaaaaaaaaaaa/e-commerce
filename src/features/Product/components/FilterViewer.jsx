@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Chip, makeStyles } from '@material-ui/core';
 import categoriesApi from 'api/categoryApi';
@@ -74,27 +74,22 @@ const FILTER_LIST = [
   },
   {
     id: 4,
-    getLabel: (filters) => 'Danh Mục',
-
-    //   (async () => {
-    //     const category = await categoriesApi.getAll();
-    //     console.log(category);
-    //     let label;
-    //     label = category.find((x) => x.id === filters[category.id]);
-    //     console.log(label);
-    //   })();
-    //   return label.name;
+    getLabel: (filters, categoryList) => {
+      console.log(categoryList);
+      let label;
+      label = categoryList.find((x) => x.id === filters['category.id']);
+      console.log(label.name);
+      return label.name;
+    },
 
     isActive: () => true,
-    isVisible: (filters) =>
-      Object.keys(filters).includes('salePrice_gte') &&
-      Object.keys(filters).includes('salePrice_lte'),
+    isVisible: (filters) => Object.keys(filters).includes('category.id'),
+    // Object.keys(filters).includes('salePrice_lte'),
 
     isRemoveale: true,
     onRemove: (filters) => {
       const newFilters = { ...filters };
-      //   delete newFilters.category.id;
-      //   delete newFilters.salePrice_lte;
+      if (filters['category.id']) delete newFilters['category.id'];
       return newFilters;
     },
     onToggle: null,
@@ -102,24 +97,29 @@ const FILTER_LIST = [
 ];
 
 function FilterViewer({ filters = {}, onChange = null }) {
-  //   useEffect(() => {
-  //     (async () => {
-  //       const category = await categoriesApi.getAll();
-  //       console.log(Object.keys(category));
-  //       let label;
-  //       // label = category.filter((x) => x.id === filters[category.id]);
-  //       // console.log(label);
-  //     })();
-  //   }, [filters]);
+  const [categoryList, setCategoryList] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const category = await categoriesApi.getAll();
+      // let label;
+      console.log(category.map((item) => ({ id: item.id, name: item.name })));
+      setCategoryList(
+        category.map((item) => ({ id: item.id, name: item.name }))
+      );
+    })();
+  }, []);
 
   const classes = useStyles();
-  console.log(filters);
+
+  const visiableFilters = useMemo(() => {
+    return FILTER_LIST.filter((x) => x.isVisible(filters));
+  }, [filters]);
   return (
     <Box component="ul" className={classes.root}>
-      {FILTER_LIST.filter((x) => x.isVisible(filters)).map((x) => (
+      {visiableFilters.map((x) => (
         <li key={x.id}>
           <Chip
-            label={x.getLabel(filters)}
+            label={x.getLabel(filters, categoryList)}
             color={x.isActive(filters) ? 'primary' : 'default'}
             clickable={!x.isRemoveale}
             onClick={
