@@ -106,8 +106,8 @@ function Header() {
             Gardena
           </Typography>
 
-          <NavLink className={classes.link} to="/todos">
-            <Button color="inherit">Todos</Button>
+          <NavLink className={classes.link} to="/products">
+            <Button color="inherit">Products</Button>
           </NavLink>
           <NavLink className={classes.link} to="/album">
             <Button color="inherit">Album</Button>
