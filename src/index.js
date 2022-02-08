@@ -16,9 +16,9 @@ ReactDOM.render(
           anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         >
           <App />
-        </SnackbarProvider>{' '}
-      </BrowserRouter>{' '}
-    </Provider>{' '}
+        </SnackbarProvider>
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
