@@ -28,13 +28,35 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
     textDecoration: 'line-through',
   },
-  promotionPercent: {},
+  promotionPercent: {
+    padding: theme.spacing(0.3, 0.4),
+    border: '0.7px solid black',
+    borderRadius: '4px',
+    fontWeight: '500',
+  },
+  freeShip: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: theme.spacing(1),
+
+    '&> img': {
+      width: '78px',
+      height: '13px',
+      marginRight: theme.spacing(1),
+    },
+  },
 }));
 
 function ProductInfo({ product }) {
   const classes = useStyles();
-  const { name, shortDescription, salePrice, originalPrice, promotionPercent } =
-    product;
+  const {
+    name,
+    shortDescription,
+    salePrice,
+    originalPrice,
+    promotionPercent,
+    isFreeShip,
+  } = product;
   return (
     <Box className={classes.root}>
       <Typography component="h1" variant="h4">
@@ -50,14 +72,23 @@ function ProductInfo({ product }) {
         </Box>
 
         {promotionPercent > 0 && (
-          <>
+          <React.Fragment>
             <Box component="span" className={classes.originalPrice}>
               {formatPrice(originalPrice)}
             </Box>
             <Box component="span" className={classes.promotionPercent}>
               {` -${promotionPercent}%`}
             </Box>
-          </>
+          </React.Fragment>
+        )}
+        {isFreeShip && (
+          <Box className={classes.freeShip}>
+            <img
+              src="https://salt.tikicdn.com/ts/upload/21/b3/00/bab4964906fcb6c56d57d9d69a6b2995.png"
+              alt="feeship"
+            />
+            <Typography> Miễn phí Vận chuyển</Typography>
+          </Box>
         )}
       </Box>
     </Box>
