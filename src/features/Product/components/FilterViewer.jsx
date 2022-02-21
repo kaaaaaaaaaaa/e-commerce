@@ -101,17 +101,17 @@ function FilterViewer({ filters = {}, onChange = null }) {
 
   const [categoryList, setCategoryList] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const category = await categoriesApi.getAll();
-      // let label;
-      console.log(category.map((item) => ({ id: item.id, name: item.name })));
-      setCategoryList(
-        category.map((item) => ({ id: item.id, name: item.name }))
-      );
-    })();
-    return () => {};
-  }, []);
+  // useEffect(() => {
+  //   (async () => {
+  //     const category = await categoriesApi.getAll();
+  //     // let label;
+  //     console.log(category.map((item) => ({ id: item.id, name: item.name })));
+  //     setCategoryList(
+  //       category.map((item) => ({ id: item.id, name: item.name }))
+  //     );
+  //   })();
+  //   return () => {};
+  // }, []);
 
   const visiableFilters = useMemo(() => {
     return FILTER_LIST.filter((x) => x.isVisible(filters));

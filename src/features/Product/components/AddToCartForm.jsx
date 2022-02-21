@@ -35,9 +35,17 @@ function AddToCartForm({ onSubmit = null }) {
     }
     // form.reset();
   };
+  const onChange = (values) => {
+    console.log('input chanfge');
+  };
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>
-      <QuantityField name="quantity" label="Quantity" form={form} />
+      <QuantityField
+        name="quantity"
+        label="Quantity"
+        form={form}
+        onChange={onChange}
+      />
 
       <Button
         type="submit"

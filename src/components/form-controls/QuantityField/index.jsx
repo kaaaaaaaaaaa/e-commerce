@@ -1,4 +1,4 @@
-import { Box, IconButton } from '@material-ui/core';
+import { Box, IconButton, makeStyles, TextField } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
 
 QuantityField.propTypes = {
   form: PropTypes.object.isRequired,
@@ -23,18 +22,33 @@ const useStyles = makeStyles((theme) => ({
   root: {},
   box: {
     display: 'flex',
-    flexGrow: 'row no-wrap',
-    alignItem: 'center',
-    maxWidth: '170px',
+    alignItems: 'center',
+    maxWidth: '150px',
+    width: '122px',
+    border: `1px solid ${theme.palette.grey[300]}`,
+
+    borderRadius: '4px',
+  },
+  // 'MuiInputBase-root': {
+  //   height: '30px',
+  // },
+  button: {
+    margin: '5px 10px',
+  },
+  input: {
+    outline: 'none',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 }));
 
 function QuantityField(props) {
   const classes = useStyles();
-  const { name, form, label } = props;
+  const { name, form, quantity } = props;
   const { errors, setValue } = form;
   const hasError = !!errors[name];
-
   return (
     <FormControl
       variant="outlined"
@@ -43,37 +57,49 @@ function QuantityField(props) {
       fullWidth
       size="small"
     >
-      <Typography>{label}</Typography>
-
       <Controller
         //
         name={name} // is required
         control={form.control} // is required
-        size="small"
         render={({ onChange, onBlur, value, name }) => (
           <Box className={classes.box}>
             <IconButton
+              size="small"
+              className={classes.button}
               onClick={() =>
                 setValue(
                   name,
                   Number.parseInt(value) ? Number.parseInt(value) - 1 : 1
                 )
               }
+              disabled={Number.parseInt(value) === 1}
             >
               <RemoveIcon />
             </IconButton>
-            <OutlinedInput
+            <TextField
+              variant="standard"
+              InputProps={{
+                disableUnderline: true,
+              }}
               size="small"
               id={name}
-              type="number"
+              // type="number"
+              className={classes.input}
               //
               //bind value
               value={value}
-              onChange={onChange}
+              onChange={(e) => onChange(e.target.value)}
               onBlur={onBlur}
             />
             <IconButton
-              onClick={() => setValue(name, Number.parseInt(value) + 1)}
+              size="small"
+              className={classes.button}
+              onClick={() =>
+                setValue(
+                  name,
+                  Number.parseInt(value) ? Number.parseInt(value) + 1 : 1
+                )
+              }
             >
               <AddIcon />
             </IconButton>

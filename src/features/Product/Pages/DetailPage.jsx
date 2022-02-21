@@ -22,6 +22,8 @@ import ProductDescription from '../components/ProductDescription';
 import ProductAdditional from '../components/ProductAdditional';
 import ProductReview from '../components/ProductReview';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import { useDispatch } from 'react-redux';
+import { addToCart } from 'features/Cart/CartSlice';
 
 DetailPage.propTypes = {};
 
@@ -103,8 +105,8 @@ function DetailPage(props) {
     params: { productId },
     url,
   } = useRouteMatch(); //get param from url
-  console.log();
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const { product, loading } = useProductDetail(productId);
   if (loading) {
@@ -115,8 +117,15 @@ function DetailPage(props) {
     );
   }
 
-  const handleAddToCartSubmit = (value) => {
-    console.log('from add to cart submit', value);
+  const handleAddToCartSubmit = ({ quantity }) => {
+    console.log('from add to cart submit');
+    const action = addToCart({
+      id: product.id,
+      product,
+      quantity: quantity,
+    });
+    dispatch(action);
+    console.log(action);
   };
 
   return (

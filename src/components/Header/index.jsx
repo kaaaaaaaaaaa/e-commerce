@@ -1,4 +1,11 @@
-import { Box, IconButton, InputBase, Menu, MenuItem } from '@material-ui/core';
+import {
+  Badge,
+  Box,
+  IconButton,
+  InputBase,
+  Menu,
+  MenuItem,
+} from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -15,6 +22,9 @@ import { logout } from 'features/Auth/userSlice';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { cartItemsCountSlector } from 'features/Cart/selectors';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     // backgroundColor: theme.palette.secondary,
-    height: '100px',
+    height: '80px',
     display: 'flex',
     flexGrow: 1,
     alignItems: 'center',
@@ -87,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '70ch',
+      width: '100%',
     },
   },
 }));
@@ -101,7 +111,8 @@ function Header() {
   const [open, setOpen] = useState();
   const loggegUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggegUser.id;
-
+  const cartItemsCount = useSelector(cartItemsCountSlector);
+  const history = useHistory();
   //
   const dispatch = useDispatch();
 
@@ -128,7 +139,9 @@ function Header() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  function handleCartClick() {
+    history.push('/cart');
+  }
   const classes = useStyles();
 
   return (
@@ -156,6 +169,7 @@ function Header() {
               />
             </div>
           </Box>
+
           <NavLink className={classes.link} to="/products">
             <Button color="inherit">Products</Button>
           </NavLink>
@@ -167,6 +181,15 @@ function Header() {
               Login
             </Button>
           )}
+          <IconButton
+            aria-label="show 4 new mails"
+            color="inherit"
+            onClick={handleCartClick}
+          >
+            <Badge badgeContent={cartItemsCount} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
           {isLoggedIn && (
             <IconButton
               className={classes.avatar}
