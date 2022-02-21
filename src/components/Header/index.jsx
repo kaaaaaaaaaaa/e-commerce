@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     height: '80px',
     display: 'flex',
     flexGrow: 1,
-    alignItems: 'center',
+    // alignItems: 'center',
     justifyContent: 'center',
   },
   menuButton: {
