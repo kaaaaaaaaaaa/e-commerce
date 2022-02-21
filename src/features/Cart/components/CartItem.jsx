@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
   IconButton,
   makeStyles,
@@ -30,10 +31,11 @@ CartItem.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(4),
-    paddingBottom: theme.spacing(3),
+    // paddingBottom: theme.spacing(3),
   },
   left: {
     width: '120px',
+    marginLeft: theme.spacing(4),
   },
   right: {
     display: 'flex',
@@ -79,6 +81,9 @@ const useStyles = makeStyles((theme) => ({
   total: {
     margin: theme.spacing(0, 2),
   },
+  divider: {
+    marginTop: theme.spacing(1),
+  },
 }));
 
 function CartItem({ cart }) {
@@ -123,7 +128,7 @@ function CartItem({ cart }) {
   //   onChange={handleInputOnchange}
   // />
   return (
-    <Container className={classes.root}>
+    <Box className={classes.root}>
       <Grid container>
         <Grid item className={classes.left}>
           <ProductThumbnail product={cart.product} />
@@ -169,7 +174,8 @@ function CartItem({ cart }) {
           </Grid>
         </Grid>
       </Grid>
-    </Container>
+      <Divider className={classes.divider} width="100%" />
+    </Box>
   );
 }
 
