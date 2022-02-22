@@ -72,46 +72,27 @@ const FILTER_LIST = [
     },
     onToggle: null,
   },
-  // {
-  //   id: 4,
-  //   getLabel: (filters, categoryList) => {
-  //     console.log(categoryList);
-  //     let label;
-  //     label = categoryList.find((x) => x.id === filters['category.id']);
-  //     // console.log(label.name);
-  //     return label.name;
-  //   },
+  {
+    id: 4,
+    getLabel: (filters) => `Danh mục: ${filters['category.id']}`,
 
-  //   isActive: () => true,
-  //   isVisible: (filters) => Object.keys(filters).includes('category.id'),
-  //   // Object.keys(filters).includes('salePrice_lte'),
+    isActive: () => true,
+    isVisible: (filters) => Object.keys(filters).includes('category.id'),
+    // Object.keys(filters).includes('salePrice_lte'),
 
-  //   isRemoveale: true,
-  //   onRemove: (filters) => {
-  //     const newFilters = { ...filters };
-  //     if (filters['category.id']) delete newFilters['category.id'];
-  //     return newFilters;
-  //   },
-  //   onToggle: null,
-  // },
+    isRemoveale: true,
+    onRemove: (filters) => {
+      const newFilters = { ...filters };
+      if (filters['category.id']) delete newFilters['category.id'];
+      return newFilters;
+    },
+    onToggle: null,
+  },
 ];
 
 function FilterViewer({ filters = {}, onChange = null }) {
+  console.log(filters);
   const classes = useStyles();
-
-  const [categoryList, setCategoryList] = useState([]);
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const category = await categoriesApi.getAll();
-  //     // let label;
-  //     console.log(category.map((item) => ({ id: item.id, name: item.name })));
-  //     setCategoryList(
-  //       category.map((item) => ({ id: item.id, name: item.name }))
-  //     );
-  //   })();
-  //   return () => {};
-  // }, []);
 
   const visiableFilters = useMemo(() => {
     return FILTER_LIST.filter((x) => x.isVisible(filters));
@@ -121,7 +102,7 @@ function FilterViewer({ filters = {}, onChange = null }) {
       {visiableFilters.map((x) => (
         <li key={x.id}>
           <Chip
-            label={x.getLabel(filters, categoryList)}
+            label={x.getLabel(filters)}
             color={x.isActive(filters) ? 'primary' : 'default'}
             clickable={!x.isRemoveale}
             onClick={

@@ -1,6 +1,7 @@
 import {
   Badge,
   Box,
+  Container,
   IconButton,
   InputBase,
   Menu,
@@ -147,59 +148,61 @@ function Header() {
   return (
     <div className={classes.root}>
       <AppBar className={classes.appBar} position="static">
-        <Toolbar>
-          <Link className={classes.logo} to="/">
-            <EmojiNatureSharpIcon className={classes.menuButton} />
-          </Link>
-          <Typography variant="h6" className={classes.title}>
-            Gardena
-          </Typography>
-          <Box className={classes.searchBox}>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
+        <Container>
+          <Toolbar>
+            <Link className={classes.logo} to="/">
+              <EmojiNatureSharpIcon className={classes.menuButton} />
+            </Link>
+            <Typography variant="h6" className={classes.title}>
+              Gardena
+            </Typography>
+            <Box className={classes.searchBox}>
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder="Search…"
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
               </div>
-              <InputBase
-                placeholder="Search…"
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-          </Box>
+            </Box>
 
-          <NavLink className={classes.link} to="/products">
-            <Button color="inherit">Products</Button>
-          </NavLink>
-          <NavLink className={classes.link} to="/album">
-            <Button color="inherit">Album</Button>
-          </NavLink>
-          {!isLoggedIn && (
-            <Button color="inherit" onClick={handleClickOpen}>
-              Login
-            </Button>
-          )}
-          <IconButton
-            aria-label="show 4 new mails"
-            color="inherit"
-            onClick={handleCartClick}
-          >
-            <Badge badgeContent={cartItemsCount} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
-          </IconButton>
-          {isLoggedIn && (
+            <NavLink className={classes.link} to="/products">
+              <Button color="inherit">Products</Button>
+            </NavLink>
+            <NavLink className={classes.link} to="/album">
+              <Button color="inherit">Album</Button>
+            </NavLink>
+            {!isLoggedIn && (
+              <Button color="inherit" onClick={handleClickOpen}>
+                Login
+              </Button>
+            )}
             <IconButton
-              className={classes.avatar}
+              aria-label="show 4 new mails"
               color="inherit"
-              onClick={handleClickUser}
+              onClick={handleCartClick}
             >
-              <AccountCircle />
+              <Badge badgeContent={cartItemsCount} color="secondary">
+                <ShoppingCartIcon />
+              </Badge>
             </IconButton>
-          )}
-        </Toolbar>
+            {isLoggedIn && (
+              <IconButton
+                className={classes.avatar}
+                color="inherit"
+                onClick={handleClickUser}
+              >
+                <AccountCircle />
+              </IconButton>
+            )}
+          </Toolbar>
+        </Container>
       </AppBar>
 
       <Menu
