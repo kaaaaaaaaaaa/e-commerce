@@ -1,0 +1,23 @@
+.slick-prev {
+    left: 23px!important;
+    z-index: 1;
+}
+
+.slick-next {
+    right: 23px!important;
+    z-index: 1;
+}
+
+.slider {
+    // width: 500px;
+    box-sizing: border-box;
+}
+
+.slick-slide img {
+    display: block;
+    width: inherit;
+}
+
+img {
+    border-radius: 5px;
+}
