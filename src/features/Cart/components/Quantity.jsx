@@ -51,8 +51,10 @@ function Quantity({ cart, quantity, handleCaculateTotal, onChange }) {
         onClick={() => {
           setValue(Number.parseInt(value) > 0 ? Number.parseInt(value) - 1 : 1);
           dispatch(setQuantity({ id: cart.id, quantity: value - 1 }));
+          if (value === 1) {
+            dispatch(removeFromCart(cart.id));
+          }
         }}
-        disabled={Number.parseInt(value) === 1}
       >
         <RemoveIcon />
       </IconButton>
