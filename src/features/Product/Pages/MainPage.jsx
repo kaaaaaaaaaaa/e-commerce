@@ -1,8 +1,8 @@
-import { Box, Container } from '@material-ui/core';
-import categoriesApi from 'api/categoryApi';
+import { Container } from '@material-ui/core';
 import Banner from 'components/Banner';
 import Category from 'components/Category';
-import React, { useEffect, useState } from 'react';
+import DealShock from 'features/DealShock';
+import React from 'react';
 
 MainPage.propTypes = {};
 
@@ -12,6 +12,7 @@ function MainPage(props) {
       <Category />
       <Container>
         <Banner />
+        <DealShock />
       </Container>
     </React.Fragment>
   );

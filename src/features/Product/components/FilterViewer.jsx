@@ -91,7 +91,7 @@ const FILTER_LIST = [
 ];
 
 function FilterViewer({ filters = {}, onChange = null }) {
-  console.log(filters);
+  // console.log(filters);
   const classes = useStyles();
 
   const visiableFilters = useMemo(() => {

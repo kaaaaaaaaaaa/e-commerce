@@ -5,7 +5,6 @@ import './style.scss';
 CategoryList.propTypes = {};
 
 function CategoryList({ categoryList }) {
-  console.log(categoryList);
   return (
     <ul className="category-list">
       {categoryList.map((item, index) => (

@@ -16,13 +16,18 @@
 
 .coupon {}
 
-.slick-slide img {
+.banner img {
     display: block;
     width: inherit;
     object-fit: cover;
 }
 
-img {
+.slider img {
+    border-radius: 5px;
+    width: 100%
+}
+
+.coupon img {
     border-radius: 5px;
     width: 100%
 }

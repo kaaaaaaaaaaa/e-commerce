@@ -22,12 +22,10 @@ function Category() {
     (async () => {
       const response = await categoriesApi.getAll();
 
-      console.log(response);
       setCategoryList(response.map((item) => item.name));
     })();
   }, []);
   //
-  console.log(categoryList);
   return (
     <Box className={classes.root}>
       <Container>

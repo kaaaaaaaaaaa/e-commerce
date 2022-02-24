@@ -1,0 +1,18 @@
+.deal {
+    // width: 220px;
+    padding: 8px 20px;
+    &:hover {
+        box-shadow: rgb(0 0 0 / 10%) 0px 0px 20px;
+        z-index: 1;
+    }
+}
+
+.deal-today {
+    display: flex;
+    // justify-content: flex-start;
+    padding: 20px;
+    align-items: flex-start;
+    &>img {
+        // width: 50px;
+    }
+}
