@@ -9,7 +9,7 @@ Category.propTypes = {
 };
 const useStyles = makeStyles((theme) => ({
   root: {
-    // height: '60px',
+    minHeight: theme.spacing(3.2),
     backgroundColor: '#fff',
     padding: theme.spacing(1.5, 1),
   },

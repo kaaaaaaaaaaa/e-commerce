@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 0,
   },
   appBar: {
     // backgroundColor: theme.palette.secondary,
@@ -40,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     // alignItems: 'center',
     justifyContent: 'center',
+    padding: 0,
+    // '&> '
+    '&>.MuiContainer-root': {
+      padding: 0,
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -61,9 +67,17 @@ const useStyles = makeStyles((theme) => ({
     zIndex: 1,
   },
   avatar: {
-    margin: theme.spacing(0, 2),
+    // margin: theme.spacing(0, 0, 0, 2),
   },
-  searchBox: { margin: theme.spacing(0, 10) },
+  searchBox: {
+    margin: theme.spacing(0, 10),
+    // [theme.breakpoints.down('xs')]: {
+    //   display: 'none',
+    // },
+    [theme.breakpoints.down('md')]: {
+      display: 'none',
+    },
+  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -156,7 +170,7 @@ function Header() {
             <Typography variant="h6" className={classes.title}>
               Gardena
             </Typography>
-            <Box className={classes.searchBox}>
+            <Box className={classes.searchBox} xs={0}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
                   <SearchIcon />

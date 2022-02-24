@@ -11,13 +11,29 @@
 .slider {
     // width: 500px;
     box-sizing: border-box;
+    flex: 1 1 0,
 }
+
+.coupon {}
 
 .slick-slide img {
     display: block;
     width: inherit;
+    object-fit: cover;
 }
 
 img {
     border-radius: 5px;
+    width: 100%
 }
+
+@media screen and (max-width: 739px) {
+    // .slider {
+    //     display: none
+    // }
+    .coupon {
+        display: none
+    }
+}
+
+@media (min-width: 740px) and (max-width: 1023px) {}

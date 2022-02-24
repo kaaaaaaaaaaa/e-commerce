@@ -1,4 +1,4 @@
-import { Container } from '@material-ui/core';
+import { Box, Container } from '@material-ui/core';
 import categoriesApi from 'api/categoryApi';
 import Banner from 'components/Banner';
 import Category from 'components/Category';
