@@ -189,9 +189,7 @@ function Header() {
             <NavLink className={classes.link} to="/products">
               <Button color="inherit">Products</Button>
             </NavLink>
-            <NavLink className={classes.link} to="/album">
-              <Button color="inherit">Album</Button>
-            </NavLink>
+
             {!isLoggedIn && (
               <Button color="inherit" onClick={handleClickOpen}>
                 Login

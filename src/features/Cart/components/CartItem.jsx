@@ -34,8 +34,11 @@ const useStyles = makeStyles((theme) => ({
     // paddingBottom: theme.spacing(3),
   },
   left: {
-    width: '120px',
+    // width: '120px',
     marginLeft: theme.spacing(4),
+    [theme.breakpoints.down('xs')]: {
+      marginLeft: 0,
+    },
   },
   right: {
     display: 'flex',
@@ -43,18 +46,35 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1.5),
     alignItems: 'center',
     justifyContent: 'flex-end',
+    //
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+      alignItems: 'start',
+      padding: theme.spacing(0, 2),
+    },
   },
   name: {
     marginTop: theme.spacing(2),
     marginLeft: theme.spacing(2),
+    [theme.breakpoints.down('xs')]: {
+      margin: 0,
+      padding: 0,
+    },
   },
   priceBox: {
     padding: theme.spacing(1),
+    //
+    [theme.breakpoints.down('xs')]: {
+      margin: theme.spacing(0),
+    },
   },
   salePrice: {
     fontSize: theme.typography.h6.fontSize,
     marginRight: theme.spacing(3),
     fontWeight: 'bold',
+    [theme.breakpoints.down('xs')]: {
+      margin: theme.spacing(1, 0),
+    },
   },
   originalPrice: {
     marginRight: theme.spacing(2),
@@ -80,9 +100,15 @@ const useStyles = makeStyles((theme) => ({
   },
   total: {
     margin: theme.spacing(0, 2),
+    [theme.breakpoints.down('xs')]: {
+      margin: theme.spacing(1.5, 0),
+    },
   },
   divider: {
     marginTop: theme.spacing(1),
+  },
+  remove: {
+    padding: 0,
   },
 }));
 
@@ -130,13 +156,14 @@ function CartItem({ cart }) {
   return (
     <Box className={classes.root}>
       <Grid container>
-        <Grid item className={classes.left}>
+        <Grid xs={5} md={4} item className={classes.left}>
           <ProductThumbnail product={cart.product} />
         </Grid>
-        <Grid item>
-          <Typography className={classes.name}>{name}</Typography>
-        </Grid>
-        <Grid item className={classes.right}>
+
+        <Grid item xs={7} md={8} className={classes.right}>
+          <Grid item>
+            <Typography className={classes.name}>{name}</Typography>
+          </Grid>
           <Grid item>
             <Typography className={classes.salePrice}>
               {formatPrice(salePrice)}
@@ -164,16 +191,33 @@ function CartItem({ cart }) {
               formatPrice(Number.parseInt(cart.quantity) * salePrice)}
           </Grid>
           <Grid item>
-            <IconButton
-              aria-label="show 4 new mails"
-              color="inherit"
-              onClick={handleRemoveCartItem}
-            >
-              <DeleteForeverIcon />
-            </IconButton>
+            <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
+              <IconButton
+                className={classes.remove}
+                aria-label="show 4 new mails"
+                color="inherit"
+                onClick={handleRemoveCartItem}
+              >
+                <DeleteForeverIcon />
+              </IconButton>
+            </Box>
+
+            <Box sx={{ display: { xs: 'block', md: 'none', lg: 'none' } }}>
+              <IconButton
+                className={classes.remove}
+                aria-label="show 4 new mails"
+                color="inherit"
+                onClick={handleRemoveCartItem}
+              >
+                <Typography color="primary" variant="subtitle1">
+                  Xóa
+                </Typography>
+              </IconButton>
+            </Box>
           </Grid>
         </Grid>
       </Grid>
+
       <Divider className={classes.divider} width="100%" />
     </Box>
   );

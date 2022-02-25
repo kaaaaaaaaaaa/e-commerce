@@ -22,8 +22,6 @@ function App() {
       <Header />
       <Switch>
         <Redirect from="/home" to="/" exact />
-        <Route path="/todos"></Route>
-        <Route path="/albums"></Route>
         <Route path="/products" component={ProductFeature}></Route>
         <Route path="/cart" component={CartFeature}></Route>
         <Route path="/" exact component={MainPage}></Route>
