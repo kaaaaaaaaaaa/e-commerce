@@ -11,6 +11,7 @@ import {
   Divider,
   makeStyles,
 } from '@material-ui/core';
+import { formatPrice } from 'utils';
 
 CartFeature.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +38,7 @@ function CartFeature(props) {
               Shop Khuyến Mãi Vui lòng chọn sản phẩm trước
             </Typography>
             <Box style={{ padding: '11px 16px' }}>
-              Total: {cartItemsTotalPrice}
+              Total: {formatPrice(cartItemsTotalPrice)}
             </Box>
           </Box>
         )}
