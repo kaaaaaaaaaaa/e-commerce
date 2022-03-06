@@ -24,7 +24,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { cartItemsCountSlector } from 'features/Cart/selectors';
+import {
+  cartItemsCountSlector,
+  cartItemsSlector,
+} from 'features/Cart/selectors';
 import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -127,6 +130,7 @@ function Header() {
   const loggegUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggegUser.id;
   const cartItemsCount = useSelector(cartItemsCountSlector);
+  const cartItems = useSelector(cartItemsSlector);
   const history = useHistory();
   //
   const dispatch = useDispatch();
@@ -200,7 +204,7 @@ function Header() {
               color="inherit"
               onClick={handleCartClick}
             >
-              <Badge badgeContent={cartItemsCount} color="secondary">
+              <Badge badgeContent={cartItems.length} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>

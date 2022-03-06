@@ -45,6 +45,14 @@ function CartList({ cartItems }) {
       {cartItems.map((cart) => (
         <CartItem key={cart.id} cart={cart} />
       ))}
+
+      {cartItems.length > 0 && (
+        <Box>
+          <Typography style={{ padding: '11px ' }}>
+            Shop Khuyến Mãi Vui lòng chọn sản phẩm trước
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 }

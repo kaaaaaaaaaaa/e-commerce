@@ -1,27 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
-  Button,
-  Container,
   Divider,
   Grid,
   IconButton,
   makeStyles,
-  Paper,
-  TextField,
   Typography,
 } from '@material-ui/core';
-import ProductThumbnail from 'features/Product/components/ProductThumbnail';
-import { formatPrice } from 'utils';
-import { useDispatch } from 'react-redux';
-import { removeFromCart, setQuantity } from '../CartSlice';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-import QuantityField from 'components/form-controls/QuantityField';
+import ProductThumbnail from 'features/Product/components/ProductThumbnail';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { formatPrice } from 'utils';
 import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useState } from 'react';
+import { removeFromCart, setQuantity } from '../CartSlice';
 import Quantity from './Quantity';
 
 CartItem.propTypes = {
@@ -30,14 +24,19 @@ CartItem.propTypes = {
 };
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(4),
-    // paddingBottom: theme.spacing(3),
+    marginTop: theme.spacing(2),
+    paddingBottom: theme.spacing(1),
+    padding: theme.spacing(1),
   },
   left: {
-    // width: '120px',
-    marginLeft: theme.spacing(4),
+    maxWidth: '120px',
+
+    '&>img': {
+      width: '120px',
+    },
     [theme.breakpoints.down('xs')]: {
       marginLeft: 0,
+      width: 'unset',
     },
   },
   right: {
@@ -53,12 +52,23 @@ const useStyles = makeStyles((theme) => ({
       padding: theme.spacing(0, 2),
     },
   },
+
+  cartRight: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    },
+  },
   name: {
-    marginTop: theme.spacing(2),
-    marginLeft: theme.spacing(2),
+    margin: theme.spacing(1.5),
+    minWidth: '210px',
     [theme.breakpoints.down('xs')]: {
       margin: 0,
       padding: 0,
+      fontSize: '15px',
+      minWidth: 'unset',
     },
   },
   priceBox: {
@@ -155,69 +165,86 @@ function CartItem({ cart }) {
   // />
   return (
     <Box className={classes.root}>
-      <Grid container>
-        <Grid xs={5} md={4} item className={classes.left}>
+      <Grid
+        container
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Grid item xs={5} md={4} className={classes.left}>
           <ProductThumbnail product={cart.product} />
         </Grid>
 
         <Grid item xs={7} md={8} className={classes.right}>
-          <Grid item>
-            <Typography className={classes.name}>{name}</Typography>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            style={{ width: '100%' }}
+          >
+            <Grid item>
+              <Typography className={classes.name}>{name}</Typography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Typography className={classes.salePrice}>
-              {formatPrice(salePrice)}
-            </Typography>
+          <Grid item className={classes.cartRight}>
+            <Grid item>
+              <Typography className={classes.salePrice}>
+                {formatPrice(salePrice)}
+              </Typography>
 
-            {promotionPercent > 0 && (
-              <Box className={classes.priceBox}>
-                <Box component="span" className={classes.originalPrice}>
-                  {formatPrice(originalPrice)}
+              {promotionPercent > 0 && (
+                <Box className={classes.priceBox}>
+                  <Box component="span" className={classes.originalPrice}>
+                    {formatPrice(originalPrice)}
+                  </Box>
                 </Box>
-              </Box>
-            )}
-          </Grid>
-          <Grid item>
-            <Quantity
-              cart={cart}
-              name="quantity"
-              label="Quantity"
-              form={form}
-              onChange={handleInputOnchange}
-            />
-          </Grid>
-          <Grid item className={classes.total}>
-            {cart.quantity > 0 &&
-              formatPrice(Number.parseInt(cart.quantity) * salePrice)}
-          </Grid>
-          <Grid item>
-            <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
-              <IconButton
-                className={classes.remove}
-                aria-label="show 4 new mails"
-                color="inherit"
-                onClick={handleRemoveCartItem}
-              >
-                <DeleteForeverIcon />
-              </IconButton>
-            </Box>
+              )}
+            </Grid>
+            <Grid item>
+              <Quantity
+                cart={cart}
+                name="quantity"
+                label="Quantity"
+                form={form}
+                onChange={handleInputOnchange}
+              />
+            </Grid>
 
-            <Box sx={{ display: { xs: 'block', md: 'none', lg: 'none' } }}>
-              <IconButton
-                className={classes.remove}
-                aria-label="show 4 new mails"
-                color="inherit"
-                onClick={handleRemoveCartItem}
-              >
-                <Typography color="primary" variant="subtitle1">
-                  Xóa
-                </Typography>
-              </IconButton>
-            </Box>
+            <Grid item className={classes.total}>
+              {cart.quantity > 0 &&
+                formatPrice(Number.parseInt(cart.quantity) * salePrice)}
+            </Grid>
+
+            <Grid item>
+              <Box sx={{ display: { xs: 'none', md: 'block', lg: 'block' } }}>
+                <IconButton
+                  className={classes.remove}
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                  onClick={handleRemoveCartItem}
+                >
+                  <DeleteForeverIcon />
+                </IconButton>
+              </Box>
+
+              <Box sx={{ display: { xs: 'block', md: 'none', lg: 'none' } }}>
+                <IconButton
+                  size="large"
+                  className={classes.remove}
+                  aria-label="show 4 new mails"
+                  color="inherit"
+                  onClick={handleRemoveCartItem}
+                >
+                  <Typography color="primary" variant="subtitle1">
+                    Xóa
+                  </Typography>
+                </IconButton>
+              </Box>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-
       <Divider className={classes.divider} width="100%" />
     </Box>
   );
