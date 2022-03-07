@@ -107,6 +107,7 @@ function DetailPage(props) {
   } = useRouteMatch(); //get param from url
   const classes = useStyles();
   const dispatch = useDispatch();
+  console.log(productId);
 
   const { product, loading } = useProductDetail(productId);
   if (loading) {
