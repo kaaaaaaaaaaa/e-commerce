@@ -18,11 +18,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CartList({ cartItems }) {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const handeClick = () => {
-    history.push('/products');
-  };
+
   // const handleInputOnchange = async (value) => {
   //   // console.log('value');
   //   // dispatch(setQuantity({
@@ -32,16 +29,6 @@ function CartList({ cartItems }) {
   const classes = useStyles();
   return (
     <Box className={classes.root}>
-      <Typography variant="h5">Giỏ hàng</Typography>
-
-      {cartItems.length <= 0 && (
-        <Box>
-          <Typography>Không có sản phẩm nào trong giỏ hàng của bạn.</Typography>
-          <Button variant="contained" color="primary" onClick={handeClick}>
-            Tiếp tục mua sắm
-          </Button>
-        </Box>
-      )}
       {cartItems.map((cart) => (
         <CartItem key={cart.id} cart={cart} />
       ))}

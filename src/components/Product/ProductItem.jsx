@@ -3,18 +3,21 @@ import ProductThumbnail from 'features/Product/components/ProductThumbnail';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { formatPrice } from 'utils';
-import './style.scss';
 
-DealItem.propTypes = {
-  deal: PropTypes.object,
+ProductItem.propTypes = {
+  product: PropTypes.object,
   handleDealShockClick: PropTypes.func,
 };
-// reuse ProductThumbnail component for thumbnail of DealShock component
-// <Typography>{deal.name}</Typography>;
 
 const useStyles = makeStyles((theme) => ({
   root: {},
-
+  product: {
+    padding: '8px 20px',
+    '&:hover': {
+      boxShadow: 'rgb(0 0 0 / 10%) 0px 0px 20px',
+      zIndex: 1,
+    },
+  },
   priceBox: {
     display: 'flex',
     alignItems: 'center',
@@ -30,45 +33,50 @@ const useStyles = makeStyles((theme) => ({
   },
   salePrice: {
     fontWeight: 'bold',
-    color: '#FF424E',
+    // color: '#FF424E',
   },
   '.MuiBox-root': {
     display: 'flex',
     alignItem: 'center',
   },
   promotionPercent: {
-    border: '2px solid #FF424E',
+    border: '.5px solid #ccc',
     borderRadius: '5px',
     padding: '0 3px',
-    backgroundColor: 'rgb(255, 240, 241)',
+    // backgroundColor: 'rgb(255, 240, 241)',
   },
 }));
 
-function DealItem({ deal, handleItemClick }) {
+function ProductItem({ product, handleItemClick }) {
   const classes = useStyles();
 
-  const handleDealShockClick = () => {
+  const handleproductShockClick = () => {
     if (handleItemClick) {
-      // console.log('click: ', deal);
-      handleItemClick(deal);
+      handleItemClick(product);
     }
   };
   return (
-    <Box className="deal" key={deal.index} onClick={handleDealShockClick}>
-      <ProductThumbnail product={deal} />
+    <Box
+      className={classes.product}
+      key={product.index}
+      onClick={handleproductShockClick}
+    >
+      <ProductThumbnail product={product} />
       <Typography component="p" className={classes.name}>
-        {deal.name}
+        {product.name}
       </Typography>
       <Box className={classes.priceBox}>
         <Typography component="span" className={classes.salePrice}>
-          {formatPrice(deal.salePrice)}
+          {formatPrice(product.salePrice)}
         </Typography>
-        <Typography component="span" className={classes.promotionPercent}>
-          -{deal.promotionPercent}%
-        </Typography>
+        {product.promotionPercent > 0 && (
+          <Typography component="span" className={classes.promotionPercent}>
+            -{product.promotionPercent}%
+          </Typography>
+        )}
       </Box>
     </Box>
   );
 }
 
-export default DealItem;
+export default ProductItem;

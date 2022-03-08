@@ -5,6 +5,7 @@ import HotDealPage from 'features/DealShock/Pages/HotDealPage';
 import MainPage from 'features/Product/Pages/MainPage';
 import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import CategoryPage from 'features/Product/Pages/CategoryPage';
 
 function App() {
   // useEffect(() => {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/products" component={ProductFeature}></Route>
         <Route path="/cart" component={CartFeature}></Route>
         <Route path="/deal" exact component={HotDealPage} />
+        <Route path="/category/:id" exact component={CategoryPage}></Route>
 
         <Route path="/" exact component={MainPage}></Route>
       </Switch>

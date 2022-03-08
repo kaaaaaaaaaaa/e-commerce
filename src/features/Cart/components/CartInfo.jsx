@@ -30,8 +30,6 @@ function CartInfo(props) {
   const cartItemsTotalPrice = useSelector(cartItemsTotalSlector);
   const cartItems = useSelector(cartItemsSlector);
 
-  console.log(cartItems.length);
-
   return (
     <Box className={classes.root} sx={{ display: { xs: 'none', md: 'block' } }}>
       <Paper className={classes.box} elevation={2}>

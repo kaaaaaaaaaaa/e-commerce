@@ -224,7 +224,7 @@ function CartItem({ cart }) {
                   color="inherit"
                   onClick={handleRemoveCartItem}
                 >
-                  <DeleteForeverIcon />
+                  <DeleteForeverIcon color="primary" />
                 </IconButton>
               </Box>
 
@@ -236,7 +236,7 @@ function CartItem({ cart }) {
                   color="inherit"
                   onClick={handleRemoveCartItem}
                 >
-                  <Typography color="primary" variant="subtitle1">
+                  <Typography color="action" variant="subtitle1">
                     Xóa
                   </Typography>
                 </IconButton>

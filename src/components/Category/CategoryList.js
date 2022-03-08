@@ -2,13 +2,26 @@ import React from 'react';
 import CategoryItem from './CategoryItem';
 import './style.scss';
 
-CategoryList.propTypes = {};
+CategoryList.propTypes = {
+  // onCategoryClick: PropTypes.func,
+};
+function CategoryList({ categoryList, onCategoryClick }) {
+  const handleItemClick = (item) => {
+    if (!onCategoryClick) return;
+    // console.log(item);
+    onCategoryClick(item);
+  };
 
-function CategoryList({ categoryList }) {
   return (
     <ul className="category-list">
       {categoryList.map((item, index) => (
-        <CategoryItem key={index} category={item} />
+        <li
+          key={index}
+          category={item.name}
+          onClick={() => handleItemClick(item)}
+        >
+          {item.name}
+        </li>
       ))}
     </ul>
   );

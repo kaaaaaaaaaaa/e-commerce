@@ -1,13 +1,30 @@
-import { Container, Grid, Paper } from '@material-ui/core';
+import {
+  Container,
+  Grid,
+  LinearProgress,
+  makeStyles,
+  Paper,
+} from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import DealItem from '../DealItem';
 import useDealHot from '../hooks/useHotDeal';
 
 HotDealPage.propTypes = {};
+const useStyles = makeStyles((theme) => ({
+  root: {
+    position: 'relative',
+  },
+  loading: {
+    position: 'absolute',
+    height: '2px',
+    top: 0,
+  },
+}));
 
 function HotDealPage(props) {
   // const [dealList,setDealList]= useSta
+  const classes = useStyles();
 
   const history = useHistory();
   const params = {
@@ -16,14 +33,13 @@ function HotDealPage(props) {
   };
 
   const { dealList, loading } = useDealHot(params);
-  console.log(dealList);
   const handleItemClick = (deal) => {
     // console.log(deal);
     history.push(`/products/${deal.id}`);
   };
 
   return (
-    <React.Fragment>
+    <React.Fragment className={classes.root}>
       <Grid
         container
         alignItems="center"
@@ -49,20 +65,26 @@ function HotDealPage(props) {
         </Grid>
       </Grid>
       <Container>
-        <Paper elevation={2} style={{ padding: 20 }}>
-          <Grid container>
-            {dealList.map((deal, index) => (
-              <Grid item lg={3} md={3} sm={4} xs={12} spacing={2}>
-                <DealItem
-                  key={index}
-                  deal={deal}
-                  handleItemClick={handleItemClick}
-                />
-              </Grid>
-              //
-            ))}
-          </Grid>
-        </Paper>
+        {loading && (
+          <LinearProgress className={classes.loading} variant="determinate" />
+        )}
+
+        {!loading && (
+          <Paper elevation={2} style={{ padding: 20 }}>
+            <Grid container>
+              {dealList.map((deal, index) => (
+                <Grid item lg={3} md={3} sm={4} xs={12} spacing={2}>
+                  <DealItem
+                    key={index}
+                    deal={deal}
+                    handleItemClick={handleItemClick}
+                  />
+                </Grid>
+                //
+              ))}
+            </Grid>
+          </Paper>
+        )}
       </Container>
     </React.Fragment>
   );
