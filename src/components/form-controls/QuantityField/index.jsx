@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Typography } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 
 QuantityField.propTypes = {
   form: PropTypes.object.isRequired,
@@ -46,6 +47,15 @@ const useStyles = makeStyles((theme) => ({
 
 function QuantityField(props) {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+
+  // enqueueSnackbar(
+  //   'The maximum purchase quantity of this product is 5.',
+  //   {
+  //     variant: 'info',
+  //   }
+  //   )
+
   const { name, form, quantity } = props;
   const { errors, setValue } = form;
   const hasError = !!errors[name];
@@ -88,18 +98,26 @@ function QuantityField(props) {
               //
               //bind value
               value={value}
-              onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => onChange()}
               onBlur={onBlur}
             />
             <IconButton
               size="small"
               className={classes.button}
-              onClick={() =>
+              onClick={() => {
+                if (Number.parseInt(value) === 5) {
+                  enqueueSnackbar(
+                    'The maximum purchase quantity of this product is 5.',
+                    {
+                      variant: 'info',
+                    }
+                  );
+                }
                 setValue(
                   name,
-                  Number.parseInt(value) ? Number.parseInt(value) + 1 : 1
-                )
-              }
+                  Number.parseInt(value) < 5 ? Number.parseInt(value) + 1 : 5
+                );
+              }}
             >
               <AddIcon />
             </IconButton>
