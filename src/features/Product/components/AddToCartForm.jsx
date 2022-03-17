@@ -36,7 +36,7 @@ function AddToCartForm({ onSubmit = null }) {
     // form.reset();
   };
   const onChange = (values) => {
-    console.log('input chanfge');
+    // console.log('input chanfge');
   };
   return (
     <form onSubmit={form.handleSubmit(handleSubmit)}>

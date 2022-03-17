@@ -24,6 +24,7 @@ import ProductReview from '../components/ProductReview';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import { useDispatch } from 'react-redux';
 import { addToCart } from 'features/Cart/CartSlice';
+import { useSnackbar } from 'notistack';
 
 DetailPage.propTypes = {};
 
@@ -107,6 +108,8 @@ function DetailPage(props) {
   } = useRouteMatch(); //get param from url
   const classes = useStyles();
   const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+
   console.log(productId);
 
   const { product, loading } = useProductDetail(productId);
@@ -127,6 +130,7 @@ function DetailPage(props) {
     });
     dispatch(action);
     console.log(action);
+    enqueueSnackbar('Added to cart successfully!.', { variant: 'success' });
   };
 
   return (
