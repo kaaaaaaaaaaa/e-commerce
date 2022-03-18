@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
+  Button,
   Divider,
   Grid,
   IconButton,
@@ -14,8 +15,15 @@ import PropTypes from 'prop-types';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { formatPrice } from 'utils';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import * as yup from 'yup';
 import { removeFromCart, setQuantity } from '../CartSlice';
+import React from 'react';
 
 CartItem.propTypes = {
   cart: PropTypes.object,
@@ -119,6 +127,11 @@ const useStyles = makeStyles((theme) => ({
   remove: {
     padding: 0,
   },
+  titleBox: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(2),
+  },
 }));
 
 function CartItem({ cart }) {
@@ -150,11 +163,22 @@ function CartItem({ cart }) {
     // form.reset();
   };
 
-  const handleRemoveCartItem = () => {
-    dispatch(removeFromCart(cart.id));
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
   };
-  const caculateTotalPrice = () => {
-    console.log('caculate');
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  //conFirmRemove
+  const conFirmRemove = (cartId) => {
+    dispatch(removeFromCart(cartId));
+  };
+  const handleRemoveCartItem = () => {
+    handleClickOpen();
   };
 
   return (
@@ -239,6 +263,36 @@ function CartItem({ cart }) {
         </Grid>
       </Grid>
       <Divider className={classes.divider} width="100%" />
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <Box className={classes.titleBox}>
+          <ReportProblemOutlinedIcon color="primary" />
+          <DialogTitle id="">{'Delete product?'}</DialogTitle>
+        </Box>
+        <DialogContent>
+          <Typography id="alert-dialog-description">
+            Do you want to delete the selected product?
+          </Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => conFirmRemove(cart.id)}
+            color="primary"
+            autoFocus
+            variant="outlined"
+          >
+            Agree
+          </Button>
+          <Button onClick={handleClose} color="primary" variant="contained">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }

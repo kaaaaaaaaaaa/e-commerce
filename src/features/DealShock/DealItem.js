@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   name: {
     margin: '5px',
+    minHeight: '48px',
   },
   salePrice: {
     fontWeight: 'bold',
