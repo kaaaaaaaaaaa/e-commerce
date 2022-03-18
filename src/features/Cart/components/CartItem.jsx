@@ -122,7 +122,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CartItem({ cart }) {
-  console.log(cart);
   const classes = useStyles();
   const { name, salePrice, originalPrice, promotionPercent } = cart.product;
   const dispatch = useDispatch();
@@ -158,11 +157,6 @@ function CartItem({ cart }) {
     console.log('caculate');
   };
 
-  //   <QuantityField
-  //   name="quantity"
-  //   form={form}
-  //   onChange={handleInputOnchange}
-  // />
   return (
     <Box className={classes.root}>
       <Grid
@@ -230,13 +224,12 @@ function CartItem({ cart }) {
 
               <Box sx={{ display: { xs: 'block', md: 'none', lg: 'none' } }}>
                 <IconButton
-                  size="large"
                   className={classes.remove}
                   aria-label="show 4 new mails"
                   color="inherit"
                   onClick={handleRemoveCartItem}
                 >
-                  <Typography color="action" variant="subtitle1">
+                  <Typography color="primary" variant="subtitle1">
                     Xóa
                   </Typography>
                 </IconButton>

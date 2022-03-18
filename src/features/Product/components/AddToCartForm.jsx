@@ -60,7 +60,6 @@ function AddToCartForm({ onSubmit = null, product = {} }) {
         type="submit"
         color="primary"
         variant="contained"
-        size="large"
         style={{ width: '250px' }}
       >
         Buy

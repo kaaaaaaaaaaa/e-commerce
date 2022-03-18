@@ -136,7 +136,7 @@ function DetailPage(props) {
       quantity: quantity,
     });
     const toltalOf2Cart = quantity + productInCart?.quantity;
-    console.log(toltalOf2Cart);
+    // console.log(toltalOf2Cart);
     if (toltalOf2Cart > 5) {
       enqueueSnackbar('The maximum purchase quantity of this product is 5.', {
         variant: 'default',

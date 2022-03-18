@@ -20,6 +20,8 @@ const useStyles = makeStyles((theme) => ({
 function CartList({ cartItems }) {
   const dispatch = useDispatch();
 
+  console.log(cartItems);
+
   // const handleInputOnchange = async (value) => {
   //   // console.log('value');
   //   // dispatch(setQuantity({

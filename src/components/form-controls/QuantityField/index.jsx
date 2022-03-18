@@ -10,6 +10,10 @@ import React, { useState } from 'react';
 import { Controller } from 'react-hook-form';
 import { Typography } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
+import { useRouteMatch } from 'react-router-dom';
+
+import { useDispatch } from 'react-redux';
+import { removeFromCart, setQuantity } from 'features/Cart/CartSlice';
 
 QuantityField.propTypes = {
   form: PropTypes.object.isRequired,
@@ -48,15 +52,17 @@ const useStyles = makeStyles((theme) => ({
 function QuantityField(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
 
-  // enqueueSnackbar(
-  //   'The maximum purchase quantity of this product is 5.',
-  //   {
-  //     variant: 'info',
-  //   }
-  //   )
+  // check mode
+  const match = useRouteMatch();
+  const MODE = {
+    DetailPage: match.path === '/products/:productId',
+    CartPage: match.path === '/cart',
+  };
 
-  const { name, form, quantity } = props;
+  const { name, form, quantity, cart } = props;
+
   const { errors, setValue } = form;
   const hasError = !!errors[name];
   return (
@@ -76,13 +82,23 @@ function QuantityField(props) {
             <IconButton
               size="small"
               className={classes.button}
-              onClick={() =>
+              onClick={() => {
+                // both of
                 setValue(
                   name,
                   Number.parseInt(value) ? Number.parseInt(value) - 1 : 1
-                )
-              }
-              disabled={Number.parseInt(value) === 1}
+                );
+
+                //check
+                if (MODE.CartPage) {
+                  // set quantity in cart
+                  dispatch(setQuantity({ id: cart.id, quantity: value - 1 }));
+
+                  // remove from cart
+                  value === 1 && dispatch(removeFromCart(cart.id));
+                }
+              }}
+              disabled={MODE.DetailPage && Number.parseInt(value) === 1}
             >
               <RemoveIcon />
             </IconButton>
@@ -117,6 +133,10 @@ function QuantityField(props) {
                   name,
                   Number.parseInt(value) < 5 ? Number.parseInt(value) + 1 : 5
                 );
+
+                if (MODE.CartPage) {
+                  dispatch(setQuantity({ id: cart.id, quantity: value + 1 }));
+                }
               }}
             >
               <AddIcon />

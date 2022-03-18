@@ -79,9 +79,8 @@ function Quantity({ cart, quantity, handleCaculateTotal, onChange }) {
         className={classes.button}
         onClick={() => {
           setValue(Number.parseInt(value) > 0 ? Number.parseInt(value) + 1 : 5);
-
           // Number.parseInt(value) < 6 &&
-            dispatch(setQuantity({ id: cart.id, quantity: value + 1 }));
+
           // // if (Number.parseInt(value) <= 5) {
           // // }
         }}
