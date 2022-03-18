@@ -22,9 +22,10 @@ import ProductDescription from '../components/ProductDescription';
 import ProductAdditional from '../components/ProductAdditional';
 import ProductReview from '../components/ProductReview';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from 'features/Cart/CartSlice';
 import { useSnackbar } from 'notistack';
+import { cartItemsSlector } from 'features/Cart/selectors';
 
 DetailPage.propTypes = {};
 
@@ -102,15 +103,21 @@ ScrollTop.propTypes = {
 };
 
 function DetailPage(props) {
+  const classes = useStyles();
+
   const {
     params: { productId },
     url,
   } = useRouteMatch(); //get param from url
-  const classes = useStyles();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  console.log(productId);
+  const cartItems = useSelector(cartItemsSlector);
+  // console.log(cartItems);
+  const productInCart = cartItems.find(
+    (item) => item.id === Number.parseInt(productId)
+  );
+  // console.log(productInCart);
 
   const { product, loading } = useProductDetail(productId);
   if (loading) {
@@ -128,9 +135,19 @@ function DetailPage(props) {
       product,
       quantity: quantity,
     });
-    dispatch(action);
-    console.log(action);
-    enqueueSnackbar('Added to cart successfully!.', { variant: 'success' });
+    const toltalOf2Cart = quantity + productInCart?.quantity;
+    console.log(toltalOf2Cart);
+    if (toltalOf2Cart > 5) {
+      enqueueSnackbar('The maximum purchase quantity of this product is 5.', {
+        variant: 'default',
+      });
+      // alert(`${quantity} + ${productInCart.quantity} = ${toltalOf2Cart}`);
+    } else {
+      dispatch(action);
+      enqueueSnackbar('Added to cart successfully!.', { variant: 'success' });
+    }
+
+    // console.log(action);
   };
 
   return (
@@ -152,7 +169,10 @@ function DetailPage(props) {
             </Grid>
             <Grid item className={classes.right}>
               <ProductInfo product={product} />
-              <AddToCartForm onSubmit={handleAddToCartSubmit} />
+              <AddToCartForm
+                product={product}
+                onSubmit={handleAddToCartSubmit}
+              />
             </Grid>
           </Grid>
         </Paper>

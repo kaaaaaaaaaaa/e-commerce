@@ -8,15 +8,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import QuantityField from 'components/form-controls/QuantityField';
 import ProductThumbnail from 'features/Product/components/ProductThumbnail';
 import PropTypes from 'prop-types';
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { formatPrice } from 'utils';
 import * as yup from 'yup';
 import { removeFromCart, setQuantity } from '../CartSlice';
-import Quantity from './Quantity';
 
 CartItem.propTypes = {
   cart: PropTypes.object,
@@ -123,6 +122,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CartItem({ cart }) {
+  console.log(cart);
   const classes = useStyles();
   const { name, salePrice, originalPrice, promotionPercent } = cart.product;
   const dispatch = useDispatch();
@@ -139,7 +139,7 @@ function CartItem({ cart }) {
   //
   const form = useForm({
     defaultValues: {
-      quantity: 1,
+      quantity: cart.quantity,
     },
     resolver: yupResolver(schema), // no valodation cho minh
   });
@@ -202,7 +202,7 @@ function CartItem({ cart }) {
               )}
             </Grid>
             <Grid item>
-              <Quantity
+              <QuantityField
                 cart={cart}
                 name="quantity"
                 label="Quantity"

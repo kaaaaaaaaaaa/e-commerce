@@ -1,16 +1,25 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from '@material-ui/core';
 import QuantityField from 'components/form-controls/QuantityField';
+import { cartItemsSlector } from 'features/Cart/selectors';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useSelector } from 'react-redux';
 import * as yup from 'yup';
 
 AddToCartForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-function AddToCartForm({ onSubmit = null }) {
+function AddToCartForm({ onSubmit = null, product = {} }) {
+  const cartItems = useSelector(cartItemsSlector);
+  // console.log(cartItems);
+  // console.log(product);
+  //
+  // const cart = cartItems.find((item) => item.id === product.id);
+  // console.log(cart);
+
   const schema = yup
     .object({
       quantity: yup
