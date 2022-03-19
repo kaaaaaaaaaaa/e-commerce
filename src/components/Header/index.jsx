@@ -24,6 +24,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import CodeSharpIcon from '@material-ui/icons/CodeSharp';
+import logo from '../../assets/logo.png';
 import {
   cartItemsCountSlector,
   cartItemsSlector,
@@ -62,6 +64,12 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     color: '#F3C301',
+    '&>img': {
+      width: '40%',
+      // height: '50px',
+      filter:
+        'invert(48%) sepia(13%) saturate(3275%) hue-rotate(1039deg) brightness(391%) contrast(194%)',
+    },
   },
   closeBtn: {
     position: 'absolute',
@@ -169,11 +177,11 @@ function Header() {
         <Container>
           <Toolbar>
             <Link className={classes.logo} to="/">
-              <EmojiNatureSharpIcon className={classes.menuButton} />
+              {/* <EmojiNatureSharpIcon className={classes.menuButton} /> */}
+              {/* <CodeSharpIcon /> */}
+              <img src={logo} alt="" />
             </Link>
-            <Typography variant="h6" className={classes.title}>
-              Gardena
-            </Typography>
+            <Typography variant="h6" className={classes.title}></Typography>
             <Box className={classes.searchBox} xs={0}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
