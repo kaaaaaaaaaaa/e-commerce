@@ -60,13 +60,15 @@ function FilterByPrice({ onChange }) {
       </Typography>
       <Box className={classes.range}>
         <TextField
+          type="number"
           variant="outlined"
           name="salePrice_gte"
-          value={values.salePrice_gte}
+          value={values.salePrice_gte >= 0 ? values.salePrice_gte : 0}
           onChange={handleChange}
         />
         <span> - </span>
         <TextField
+          type="number"
           variant="outlined"
           name="salePrice_lte"
           value={values.salePrice_lte}
