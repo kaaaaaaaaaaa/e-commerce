@@ -263,9 +263,8 @@ function Header() {
             <div>
               <Register handleCloseDialog={handleClose} />
               <Box textAlign="center">
-                <Button onClick={() => setMode(MODE.LOGIN)}>
-                  Are you have account? Logi here
-                </Button>
+                Are you have account?
+                <Button onClick={() => setMode(MODE.LOGIN)}>Login here</Button>
               </Box>
             </div>
           )}
@@ -273,8 +272,9 @@ function Header() {
             <div>
               <Login handleCloseDialog={handleClose} />
               <Box textAlign="center">
+                Are you have account?
                 <Button color="inherit" onClick={() => setMode(MODE.REGISTER)}>
-                  Are you have account? Register here
+                  Register here
                 </Button>
               </Box>
             </div>
