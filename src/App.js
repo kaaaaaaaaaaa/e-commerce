@@ -8,17 +8,6 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import CategoryPage from 'features/Product/Pages/CategoryPage';
 
 function App() {
-  // useEffect(() => {
-  //   const fetchProducts = async () => {
-  //     const params = {
-  //       _limit: 10,
-  //     };
-
-  //     const productsList = await productsApi.getAll(params);
-  //     console.log('products:', productsList);
-  //   };
-  //   fetchProducts();
-  // }, []);
   return (
     <div className="App">
       <Header />

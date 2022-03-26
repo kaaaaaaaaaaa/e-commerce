@@ -1,3 +1,4 @@
+// @import '../../global.scss';
 .category-list {
     list-style-type: none;
     display: flex;
@@ -9,5 +10,6 @@
         margin-right: 20px;
         font-size: 1rem;
         cursor: pointer;
+        color: var(--primary)
     }
 }
