@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, makeStyles, Typography } from '@material-ui/core';
 
-FeaturedCategoryItem.propTypes = {};
+FeaturedCategoryItem.propTypes = {
+  category: PropTypes.object,
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   name: { maxWidth: '112px', textAlign: 'center', minHeight: '40px' },
 }));
 
-function FeaturedCategoryItem({ category }) {
+function FeaturedCategoryItem({ category = {} }) {
   const classes = useStyles();
   return (
     <Box className={classes.root}>

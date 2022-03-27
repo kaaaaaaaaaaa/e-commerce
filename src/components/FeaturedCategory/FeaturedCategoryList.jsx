@@ -12,7 +12,9 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   categoryItem: {
-    minHeight: theme.spacing(4),
+    minHeight: '156px',
+    padding: theme.spacing(1),
+    margin: theme.spacing(1),
     '&:hover': {
       boxShadow: 'rgb(0 0 0 / 10%) 0px 0px 20px',
       zIndex: 1,

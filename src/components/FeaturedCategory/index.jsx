@@ -7,9 +7,10 @@ FeaturedCategory.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: theme.spacing(3, 0),
+    padding: theme.spacing(2),
   },
   title: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
     fontWeight: 'lighter',
   },
   featuredCategory: {
