@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
       boxShadow: 'rgb(0 0 0 / 10%) 0px 0px 20px',
       zIndex: 1,
     },
+
+    [theme.breakpoints.down('sm')]: {
+      minHeight: '144px',
+    },
   },
 }));
 function FeaturedCategoryList({ categoryList = [] }) {
@@ -29,7 +33,6 @@ function FeaturedCategoryList({ categoryList = [] }) {
       direction="row"
       justifyContent="space-around"
       alignItems="center"
-      spacing={4}
       style={{ minWidth: '1200px' }}
       className={classes.root}
     >

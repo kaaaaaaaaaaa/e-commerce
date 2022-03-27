@@ -9,11 +9,20 @@ FeaturedCategoryItem.propTypes = {
 const useStyles = makeStyles((theme) => ({
   root: {
     // margin: theme.spacing(3, 0),
+    display: 'flex',
     minHeight: '70px',
+    flexDirection: 'column',
+    alignItems: 'center',
 
     '&> img': {
       width: '100px',
       height: '100px',
+    },
+    [theme.breakpoints.down('sm')]: {
+      '&> img': {
+        width: '80px',
+        height: '80px',
+      },
     },
   },
   name: { maxWidth: '112px', textAlign: 'center', minHeight: '40px' },

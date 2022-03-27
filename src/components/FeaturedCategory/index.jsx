@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'lighter',
   },
   featuredCategory: {
-    padding: theme.spacing(2),
+    // padding: theme.spacing(2),
     overflow: 'auto',
   },
 }));

@@ -69,6 +69,9 @@ const useStyles = makeStyles((theme) => ({
       // height: '50px',
       filter:
         'invert(48%) sepia(13%) saturate(3275%) hue-rotate(1039deg) brightness(391%) contrast(194%)',
+      [theme.breakpoints.down('sm')]: {
+        width: '70%',
+      },
     },
   },
   closeBtn: {
