@@ -5,10 +5,7 @@ import { Box } from '@material-ui/core';
 CategoryItem.propTypes = {};
 
 function CategoryItem({ category }) {
-    return <li >
-
-
-        { category } < /li>;
+  return <li>{category} </li>;
 }
 
 export default CategoryItem;
