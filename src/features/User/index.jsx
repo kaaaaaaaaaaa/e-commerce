@@ -55,34 +55,39 @@ function User(props) {
   const match = useRouteMatch();
   const user = JSON.parse(localStorage.getItem('user')) || {};
   return (
-    <Container className={classes.root}>
-      <Paper elevation={2} className={classes.left}>
-        <Box className={classes.user}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
-          <Box className={classes.userInfo}>
-            <Typography>{user.fullName}</Typography>
-            <Box className={classes.edit}>
-              <EditIcon />
-              <Typography>Edit profile</Typography>
+    <Container>
+      <Box className={classes.root}>
+        <Paper elevation={2} className={classes.left}>
+          <Box className={classes.user}>
+            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Box className={classes.userInfo}>
+              <Typography>{user.fullName}</Typography>
+              <Box className={classes.edit}>
+                <EditIcon />
+                <Typography>Edit profile</Typography>
+              </Box>
             </Box>
           </Box>
-        </Box>
-        <Divider light />
-        <UserMenu />
-      </Paper>
-      <Paper elevation={2} className={classes.right}>
-        <Switch>
-          <Route
-            path={`${match.url}/account/profile`}
-            component={ProfilePage}
-          />
-          <Route path={`${match.url}/notification`} component={Notification} />
-          <Route
-            path={`${match.url}/voucher-wallet`}
-            component={VoucherWallet}
-          />
-        </Switch>
-      </Paper>
+          <Divider light />
+          <UserMenu />
+        </Paper>
+        <Paper elevation={2} className={classes.right}>
+          <Switch>
+            <Route
+              path={`${match.url}/account/profile`}
+              component={ProfilePage}
+            />
+            <Route
+              path={`${match.url}/notification`}
+              component={Notification}
+            />
+            <Route
+              path={`${match.url}/voucher-wallet`}
+              component={VoucherWallet}
+            />
+          </Switch>
+        </Paper>
+      </Box>
     </Container>
   );
 }
