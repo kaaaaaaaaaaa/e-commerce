@@ -160,7 +160,9 @@ function Header() {
   };
 
   //
-  const handleClickUserInfo = () => {};
+  const handleClickUserInfo = () => {
+    history.push('/user/account/profile');
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -223,7 +225,7 @@ function Header() {
               <IconButton
                 className={classes.avatar}
                 color="inherit"
-                onClick={handleClickUser}
+                onClick={handleClickUserInfo}
               >
                 <AccountCircle />
               </IconButton>
@@ -231,7 +233,7 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-
+      {/* 
       <Menu
         anchorEl={anchorEl}
         keepMounted
@@ -249,7 +251,7 @@ function Header() {
       >
         <MenuItem onClick={handleClickUserInfo}>My account</MenuItem>
         <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
-      </Menu>
+      </Menu> */}
 
       <Dialog
         disableEscapeKeyDown
