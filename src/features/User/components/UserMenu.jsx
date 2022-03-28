@@ -28,16 +28,18 @@ const useStyles = makeStyles((theme) => ({
 
 function UserMenu(props) {
   const { url } = useRouteMatch();
-  console.log(url);
   const classes = useStyles();
 
   return (
-    <Box component="ul" className={classes.root}>
+    <Box className={classes.root}>
       <Link component={NavLink} to={`${url}/notification`} exact={true}>
         Notification
       </Link>
       <Link component={NavLink} to={`${url}/voucher-wallet`} exact={true}>
         My Voucher
+      </Link>
+      <Link component={NavLink} to={`${url}/purchase`} exact={true}>
+        Purchase Order
       </Link>
     </Box>
   );

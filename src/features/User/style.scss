@@ -1,0 +1,26 @@
+.box-search {
+    margin: 8px 0;
+}
+
+.tab-content {
+    padding: 16px;
+    margin: 8px 0
+}
+
+//
+.right-content {
+    padding: 8px
+}
+
+// overwrive css search input
+.MuiOutlinedInput-input {
+    padding: 14.5px 14px !important
+}
+
+.MuiOutlinedInput-root {
+    border-radius: 2px;
+}
+
+.MuiTab-root {
+    text-transform: capitalize !important;
+}

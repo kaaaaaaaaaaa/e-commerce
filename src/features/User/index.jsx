@@ -4,6 +4,7 @@ import { Box } from '@mui/material';
 import ProfilePage from './Pages/PorfilePage';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import UserMenu from './components/UserMenu';
+import PurchaseOrder from './components/PurchaseOrder';
 import EditIcon from '@material-ui/icons/Edit';
 import {
   Avatar,
@@ -15,6 +16,8 @@ import {
 } from '@material-ui/core';
 import Notification from './components/Notification';
 import VoucherWallet from './components/VoucherWallet';
+import { useSelector } from 'react-redux';
+import './style.scss';
 
 User.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -27,10 +30,9 @@ const useStyles = makeStyles((theme) => ({
   left: {
     marginRight: theme.spacing(2),
     padding: theme.spacing(2),
-    width: '300px',
+    minWidth: '220px',
   },
   right: {
-    padding: theme.spacing(2),
     width: '100%',
     height: '100%',
   },
@@ -42,18 +44,19 @@ const useStyles = makeStyles((theme) => ({
   },
   user: {
     padding: theme.spacing(1),
-
     display: 'flex',
   },
   edit: {
     display: 'flex',
+    fontSize: '10px',
   },
 }));
 
 function User(props) {
   const classes = useStyles();
   const match = useRouteMatch();
-  const user = JSON.parse(localStorage.getItem('user')) || {};
+  //get user from redux store
+  const user = useSelector((state) => state.user.current);
   return (
     <Container>
       <Box className={classes.root}>
@@ -63,7 +66,7 @@ function User(props) {
             <Box className={classes.userInfo}>
               <Typography>{user.fullName}</Typography>
               <Box className={classes.edit}>
-                <EditIcon />
+                <EditIcon color="action" />
                 <Typography>Edit profile</Typography>
               </Box>
             </Box>
@@ -71,7 +74,7 @@ function User(props) {
           <Divider light />
           <UserMenu />
         </Paper>
-        <Paper elevation={2} className={classes.right}>
+        <Box className={classes.right}>
           <Switch>
             <Route
               path={`${match.url}/account/profile`}
@@ -85,8 +88,9 @@ function User(props) {
               path={`${match.url}/voucher-wallet`}
               component={VoucherWallet}
             />
+            <Route path={`${match.url}/purchase`} component={PurchaseOrder} />
           </Switch>
-        </Paper>
+        </Box>
       </Box>
     </Container>
   );

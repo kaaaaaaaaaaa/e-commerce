@@ -23,7 +23,7 @@ function Login(props) {
       //
       const user = await dispatch(login(values)).unwrap(); // unwrap()=> get result when fullfilled, throw error when rejected
       //handle when Register successfully
-      console.log('user login: ', user);
+      // console.log('user login: ', user);
       enqueueSnackbar('Login successfully!.', { variant: 'success' });
 
       //close dialog when register successfully
