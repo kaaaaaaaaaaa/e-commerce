@@ -4,7 +4,22 @@
 
 .tab-content {
     padding: 16px;
-    margin: 8px 0
+    margin: 8px 0;
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    &__box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center
+    }
 }
 
 //

@@ -39,7 +39,14 @@ function TabPanel(props) {
             </Box>
           )}
           <Paper elevation={2} className="tab-content" padding={3}>
-            <Typography>{children}</Typography>
+            {/* <Typography>{children}</Typography> */}
+            <Box className="tab-content__box">
+              <img
+                src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/5fafbb923393b712b96488590b8f781f.png"
+                alt=""
+              />
+              <Typography>No orders yet</Typography>
+            </Box>
           </Paper>
         </div>
       )}

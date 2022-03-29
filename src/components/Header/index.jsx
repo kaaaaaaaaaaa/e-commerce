@@ -161,7 +161,8 @@ function Header() {
 
   //
   const handleClickUserInfo = () => {
-    history.push('/user/account/profile');
+    // history.push('/user/account/profile');
+    history.push('/user/purchase');
   };
 
   const handleClickOpen = () => {
