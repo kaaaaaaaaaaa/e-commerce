@@ -4,6 +4,7 @@ import ProductList from './ProductList';
 import { useRouteMatch } from 'react-router-dom';
 import useProduct from '../hooks/useProducts';
 import productApi from 'api/productApi';
+import ProductSkeletonList from './ProductSkeletonList';
 import {
   Box,
   Container,
@@ -19,7 +20,11 @@ import Loading from 'components/form-controls/Loading/Loading';
 SearchResult.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
-    container: {},
+    // margin: theme.spacing(1, 0),
+  },
+  title: { fontWeight: 'bold', padding: theme.spacing(1) },
+  container: {
+    padding: theme.spacing(2, 1),
   },
 }));
 
@@ -60,27 +65,31 @@ function SearchResult(props) {
 
   return (
     <Container className={classes.root}>
-      <Paper className={classes.container}>
-        <Grid container>
-          {loading && <Loading />}
-
-          {!loading &&
-            searchedProduct.map((product) => (
+      {/* {loading && <Loading />} */}
+      {loading && <ProductSkeletonList />}
+      {!loading && (
+        <Paper className={classes.container}>
+          <Typography className={classes.title} variant="h5">
+            Kết quả tìm kiếm với '{value}' :
+          </Typography>
+          <Grid container>
+            {searchedProduct.map((product) => (
               <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
                 <ProductItem product={product} />
               </Grid>
             ))}
-        </Grid>
+          </Grid>
 
-        {/* <Box className={classes.pagination}>
-          <Pagination
-            mt={2}
-            count={Math.ceil(pagination.total / pagination.limit)} // total page
-            page={pagination.page} // current page
-            onChange={handlepageChange}
-          />
-        </Box> */}
-      </Paper>
+          {/* <Box className={classes.pagination}>
+              <Pagination
+                mt={2}
+                count={Math.ceil(pagination.total / pagination.limit)} // total page
+                page={pagination.page} // current page
+                onChange={handlepageChange}
+              />
+            </Box> */}
+        </Paper>
+      )}
     </Container>
   );
 }
