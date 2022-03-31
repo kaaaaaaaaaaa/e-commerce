@@ -7,6 +7,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import CategoryPage from 'features/Product/Pages/CategoryPage';
 import User from 'features/User';
+import SearchResult from 'features/Product/components/SearchResult';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/deal" exact component={HotDealPage} />
         <Route path="/category/:id" exact component={CategoryPage}></Route>
         <Route path="/user" component={User} />
+        <Route path="/search=:value" component={SearchResult} />
 
         <Route path="/" exact component={MainPage}></Route>
       </Switch>

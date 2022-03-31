@@ -20,7 +20,7 @@ import { AccountCircle, Close } from '@mui/icons-material';
 import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import { logout } from 'features/Auth/userSlice';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -31,6 +31,7 @@ import {
   cartItemsSlector,
 } from 'features/Cart/selectors';
 import { useHistory } from 'react-router-dom';
+import useProduct from 'features/Product/hooks/useProducts';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -142,27 +143,42 @@ function Header() {
   const isLoggedIn = !!loggegUser.id;
   const cartItemsCount = useSelector(cartItemsCountSlector);
   const cartItems = useSelector(cartItemsSlector);
+
   const history = useHistory();
+  const [valueSearch, setvalueSearch] = useState('');
+
   //
   const dispatch = useDispatch();
 
   //hanle open menu user
-  const [anchorEl, setAnchorEl] = useState(null);
-  const handleClickUser = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
-  // handleLogout
-  const handleLogoutClick = () => {
-    dispatch(logout());
-  };
+  // const [anchorEl, setAnchorEl] = useState(null);
+  // const handleClickUser = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleCloseMenu = () => {
+  //   setAnchorEl(null);
+  // };
+  // // handleLogout
+  // const handleLogoutClick = () => {
+  //   dispatch(logout());
+  // };
 
   //
   const handleClickUserInfo = () => {
     // history.push('/user/account/profile');
     history.push('/user/purchase');
+  };
+
+  //handle input change
+  const handleSearchOnchange = (e) => {
+    setvalueSearch(e.target.value);
+  };
+
+  const handleSearchOnkeyUp = (e) => {
+    if (e.key === 'Enter') {
+      if (valueSearch.trim() === '') return;
+      history.push('/search=' + valueSearch);
+    }
   };
 
   const handleClickOpen = () => {
@@ -175,6 +191,7 @@ function Header() {
   function handleCartClick() {
     history.push('/cart');
   }
+
   const classes = useStyles();
 
   return (
@@ -199,7 +216,10 @@ function Header() {
                     root: classes.inputRoot,
                     input: classes.inputInput,
                   }}
+                  value={valueSearch}
                   inputProps={{ 'aria-label': 'search' }}
+                  onChange={(e) => handleSearchOnchange(e)}
+                  onKeyUp={(e) => handleSearchOnkeyUp(e)}
                 />
               </div>
             </Box>

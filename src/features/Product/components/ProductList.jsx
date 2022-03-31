@@ -1,4 +1,5 @@
 import { Box, Grid, Typography } from '@material-ui/core';
+import ProductItem from 'components/Product/ProductItem';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Product from './Product';
@@ -22,7 +23,7 @@ function ProductList({ data }) {
         )}
         {data.map((product) => (
           <Grid item key={product.id} xs={12} sm={6} md={4} lg={4}>
-            <Product product={product} />
+            <ProductItem product={product} />
           </Grid>
         ))}
       </Grid>
