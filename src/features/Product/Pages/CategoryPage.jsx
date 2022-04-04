@@ -11,6 +11,7 @@ import {
   Paper,
   Typography,
 } from '@material-ui/core';
+import ProductSkeletonList from '../components/ProductSkeletonList';
 
 CategoryPage.propTypes = {};
 const useStyles = makeStyles((theme) => ({
@@ -26,31 +27,44 @@ const useStyles = makeStyles((theme) => ({
 function CategoryPage(props) {
   const classes = useStyles();
   const [categoryList, setCategoryList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const {
     params: { id },
   } = useRouteMatch();
+
+  console.log(loading);
   const params = {
     'category.id': id,
   };
   useEffect(() => {
     (async () => {
-      const { data, pagination } = await productApi.getAll(params);
-      console.log(data);
-      setCategoryList(data);
+      try {
+        setLoading(true);
+        const { data, pagination } = await productApi.getAll(params);
+        console.log(data);
+        setCategoryList(data);
+      } catch (error) {
+        console.log('Failed to fetch data category ', error);
+      }
+      setLoading(false);
     })();
   }, []);
 
   return (
     <Container className={classes.root}>
-      <Typography variant="h5">{`Danh muc: ${id}`}</Typography>
       <Paper className={classes.container}>
-        <Grid container>
-          {categoryList.map((item) => (
-            <Grid key={item.id} item lg={3} md={4} sm={4} xs={6}>
-              <ProductItem product={item} />
-            </Grid>
-          ))}
-        </Grid>
+        <Typography variant="h5">{`Danh muc: ${id}`}</Typography>
+
+        {loading && <ProductSkeletonList length={9} />}
+        {!loading && (
+          <Grid container>
+            {categoryList.map((item) => (
+              <Grid key={item.id} item lg={3} md={4} sm={4} xs={6}>
+                <ProductItem product={item} />
+              </Grid>
+            ))}
+          </Grid>
+        )}
       </Paper>
     </Container>
   );

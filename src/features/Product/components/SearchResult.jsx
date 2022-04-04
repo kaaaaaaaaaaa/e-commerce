@@ -72,13 +72,29 @@ function SearchResult(props) {
           <Typography className={classes.title} variant="h5">
             Kết quả tìm kiếm với '{value}' :
           </Typography>
-          <Grid container>
-            {searchedProduct.map((product) => (
-              <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                <ProductItem product={product} />
+          {searchedProduct.length <= 0 ? (
+            <Typography>không tìm thấy sản phẩm nào</Typography>
+          ) : (
+            <Box>
+              <Typography>
+                Có
+                <Typography
+                  style={{ fontWeight: 'bold', margin: '0 4px' }}
+                  component="span"
+                >
+                  {searchedProduct.length}
+                </Typography>
+                sản phẩm được tìm thấy
+              </Typography>
+              <Grid container>
+                {searchedProduct.map((product) => (
+                  <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
+                    <ProductItem product={product} />
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
+            </Box>
+          )}
 
           {/* <Box className={classes.pagination}>
               <Pagination
