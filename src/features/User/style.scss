@@ -27,15 +27,20 @@
     padding: 8px
 }
 
+//
 // overwrive css search input
-.MuiOutlinedInput-input {
-    padding: 14.5px 14px !important
-}
+.tab-panel {}
 
-.MuiOutlinedInput-root {
-    border-radius: 2px;
+.tab-container {
+    .MuiOutlinedInput-input {
+        padding: 14.5px 14px !important
+    }
+    .MuiOutlinedInput-root {
+        border-radius: 2px;
+    }
 }
 
 .MuiTab-root {
     text-transform: capitalize !important;
+    min-width: 144px!important;
 }

@@ -17,7 +17,6 @@ import {
 import Notification from './components/Notification';
 import VoucherWallet from './components/VoucherWallet';
 import { useSelector } from 'react-redux';
-import './style.scss';
 
 User.propTypes = {};
 const useStyles = makeStyles((theme) => ({

@@ -5,6 +5,8 @@ import Tab from '@material-ui/core/Tab';
 import { AppBar, Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import { TextField, IconButton } from '@material-ui/core';
 
+import '../style.scss';
+
 import { SearchOutlined } from '@material-ui/icons';
 
 PurchaseOrder.propTypes = {};
@@ -13,6 +15,7 @@ function TabPanel(props) {
 
   return (
     <div
+      className="tab-panel"
       role="tabpanel"
       hidden={value !== index}
       id={`scrollable-auto-tabpanel-${index}`}
@@ -20,7 +23,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <div className="">
+        <div className="tab-container">
           {value === 0 && (
             <Box className="box-search">
               <TextField
