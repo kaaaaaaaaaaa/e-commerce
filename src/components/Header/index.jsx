@@ -32,7 +32,9 @@ import {
 } from 'features/Cart/selectors';
 import { useHistory } from 'react-router-dom';
 import useProduct from 'features/Product/hooks/useProducts';
-
+import { createTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from '../../styles/GlobalStyle';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -41,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
   },
   appBar: {
-    // backgroundColor: theme.palette.secondary,
+    // backgroundColor: 'var(--primary)',
+    background: 'var(--header-color)',
     height: '80px',
     display: 'flex',
     flexGrow: 1,
@@ -116,11 +119,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    color: 'secondary',
   },
   inputRoot: {
-    color: 'inherit',
+    border: '1px solid var(--secondary)',
+    borderRadius: 'inherit',
   },
   inputInput: {
+    color: 'var(--secondary)',
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -137,6 +143,7 @@ const MODE = {
 };
 
 function Header() {
+  console.log(theme);
   const [mode, setMode] = useState(MODE.LOGIN);
   const [open, setOpen] = useState();
   const loggegUser = useSelector((state) => state.user.current);
@@ -208,9 +215,10 @@ function Header() {
             <Box className={classes.searchBox} xs={0}>
               <div className={classes.search}>
                 <div className={classes.searchIcon}>
-                  <SearchIcon />
+                  <SearchIcon style={{ color: 'var(--secondary)' }} />
                 </div>
                 <InputBase
+                  color="secondary"
                   placeholder="Search…"
                   classes={{
                     root: classes.inputRoot,
@@ -225,27 +233,27 @@ function Header() {
             </Box>
 
             <NavLink className={classes.link} to="/products">
-              <Button color="inherit">Products</Button>
+              <Button color="secondary">Products</Button>
             </NavLink>
 
             {!isLoggedIn && (
-              <Button color="inherit" onClick={handleClickOpen}>
+              <Button color="secondary" onClick={handleClickOpen}>
                 Login
               </Button>
             )}
             <IconButton
               aria-label="show 4 new mails"
-              color="inherit"
+              color="secondary"
               onClick={handleCartClick}
             >
               <Badge badgeContent={cartItems.length} color="secondary">
-                <ShoppingCartIcon />
+                <ShoppingCartIcon style={{ color: 'var(--secondary)' }} />
               </Badge>
             </IconButton>
             {isLoggedIn && (
               <IconButton
                 className={classes.avatar}
-                color="inherit"
+                color="secondary"
                 onClick={handleClickUserInfo}
               >
                 <AccountCircle />
@@ -299,7 +307,7 @@ function Header() {
               <Login handleCloseDialog={handleClose} />
               <Box textAlign="center">
                 Are you have account?
-                <Button color="inherit" onClick={() => setMode(MODE.REGISTER)}>
+                <Button onClick={() => setMode(MODE.REGISTER)}>
                   Register here
                 </Button>
               </Box>

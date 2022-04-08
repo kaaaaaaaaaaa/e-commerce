@@ -93,7 +93,7 @@ function RegisterForm({ onSubmit }) {
       {' '}
       {isSubmitting && <LinearProgress className={classes.progress} />}{' '}
       <Avatar className={classes.avatar}>
-        <LockClockOutlined />
+        <LockClockOutlined color="primary" />
       </Avatar>{' '}
       <Typography className={classes.title} component="h1" variant="h5">
         Create New Account{' '}

@@ -41,15 +41,11 @@ const useStyles = makeStyles((theme) => ({
 function LoginForm({ onSubmit }) {
   const schema = yup
     .object({
-     
       identifier: yup
         .string()
         .required('Please enter your email address.')
         .email('Please enter a valid email address'),
-      password: yup
-        .string()
-        .required('Please enter your password.')
-      
+      password: yup.string().required('Please enter your password.'),
     })
     .required();
 
@@ -73,10 +69,9 @@ function LoginForm({ onSubmit }) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      
       {isSubmitting && <LinearProgress className={classes.progress} />}
       <Avatar className={classes.avatar}>
-        <LockClockOutlined />
+        <LockClockOutlined color="primary" />
       </Avatar>
       <Typography className={classes.title} component="h1" variant="h5">
         Create New Account
@@ -84,7 +79,7 @@ function LoginForm({ onSubmit }) {
       <form onSubmit={form.handleSubmit(handleSubmit)}>
         <InputField name="identifier" label="Email" form={form} />
         <PasswordField name="password" label="Password" form={form} />
-       
+
         <Button
           type="submit"
           color="primary"
@@ -94,7 +89,7 @@ function LoginForm({ onSubmit }) {
           disabled={isSubmitting}
           size="large"
         >
-      Sign in
+          Sign in
         </Button>
       </form>
     </div>
