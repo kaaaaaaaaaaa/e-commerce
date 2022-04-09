@@ -24,13 +24,11 @@ const useStyles = makeStyles((theme) => ({
   // hide tool back To Top
   backToTopAnchor: {
     minHeight: '0px !important',
-    [theme.breakpoints.up('sx')]: {
+    [theme.breakpoints.up('sm')]: {
       minHeight: '0px !important',
     },
   },
   backToTop: {
-    height: '0px !important',
-
     position: 'fixed',
     bottom: '5rem',
     right: '10rem',

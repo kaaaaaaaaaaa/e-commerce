@@ -10,21 +10,22 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexFlow: 'row nowrap',
     justifyContent: 'center',
-    alignItem: 'center',
-
+    alignItems: 'center',
     listStyleType: 'none',
-    padding: '0',
+    marginBottom: 0,
+    padding: theme.spacing(4, 0),
     '& > li': {
       margin: theme.spacing(2, 4),
     },
     '& > li > a': {
-      color: theme.palette.grey[700],
       padding: theme.spacing(2, 4),
+      fontSize: '22px',
+      fontWeight: '600',
+      color: 'var(--text-light)!important',
     },
     '& > li > a.active': {
       color: theme.palette.primary.main,
       textDecoration: 'underline',
-      //   fontWeight: 'bold',
     },
   },
 }));

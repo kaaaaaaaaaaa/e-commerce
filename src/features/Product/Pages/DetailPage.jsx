@@ -49,6 +49,11 @@ const useStyles = makeStyles((theme) => ({
     left: '0',
     right: '0',
   },
+  productDetail: {
+    padding: theme.spacing(0, 2),
+
+    minHeight: '200px',
+  },
 }));
 
 function DetailPage(props) {
@@ -116,19 +121,20 @@ function DetailPage(props) {
             </Grid>
           </Grid>
         </Paper>
-
-        <ProductMenu />
-        <Switch>
-          <Route exact={true} path={url}>
-            <ProductDescription product={product} />
-          </Route>
-          <Route exact={true} path={`${url}/additional`}>
-            <ProductAdditional product={product} />
-          </Route>
-          <Route exact={true} path={`${url}/reviews`}>
-            <ProductReview product={product} />
-          </Route>
-        </Switch>
+        <Paper className={classes.productDetail}>
+          <ProductMenu />
+          <Switch>
+            <Route exact={true} path={url}>
+              <ProductDescription product={product} />
+            </Route>
+            <Route exact={true} path={`${url}/additional`}>
+              <ProductAdditional product={product} />
+            </Route>
+            <Route exact={true} path={`${url}/reviews`}>
+              <ProductReview product={product} />
+            </Route>
+          </Switch>
+        </Paper>
       </Container>
     </Box>
   );
