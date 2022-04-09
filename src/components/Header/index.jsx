@@ -35,6 +35,7 @@ import useProduct from 'features/Product/hooks/useProducts';
 import { createTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/core/styles';
 import theme from '../../styles/GlobalStyle';
+import './style.scss';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -246,7 +247,7 @@ function Header() {
               color="secondary"
               onClick={handleCartClick}
             >
-              <Badge badgeContent={cartItems.length} color="secondary">
+              <Badge badgeContent={cartItems.length}>
                 <ShoppingCartIcon style={{ color: 'var(--secondary)' }} />
               </Badge>
             </IconButton>
