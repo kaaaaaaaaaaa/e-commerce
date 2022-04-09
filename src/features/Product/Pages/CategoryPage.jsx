@@ -1,6 +1,6 @@
 import productApi from 'api/productApi';
 import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import ProductItem from 'components/Product/ProductItem';
 import ProductList from '../components/ProductList';
 import {
@@ -28,6 +28,7 @@ function CategoryPage(props) {
   const classes = useStyles();
   const [categoryList, setCategoryList] = useState([]);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
   const {
     params: { id },
   } = useRouteMatch();
@@ -49,6 +50,9 @@ function CategoryPage(props) {
       setLoading(false);
     })();
   }, []);
+  const handleProductClick = async (item) => {
+    history.push(`/products/${item.id}`);
+  };
 
   return (
     <Container className={classes.root}>
@@ -60,7 +64,11 @@ function CategoryPage(props) {
           <Grid container>
             {categoryList.map((item) => (
               <Grid key={item.id} item lg={3} md={4} sm={4} xs={6}>
-                <ProductItem product={item} />
+                <ProductItem
+                  handleItemClick={handleProductClick}
+                  Cl
+                  product={item}
+                />
               </Grid>
             ))}
           </Grid>

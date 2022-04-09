@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 function ProductItem({ product, handleItemClick }) {
   const classes = useStyles();
 
-  const handleproductShockClick = () => {
+  const onClickProduct = () => {
     if (handleItemClick) {
       handleItemClick(product);
     }
@@ -59,7 +59,7 @@ function ProductItem({ product, handleItemClick }) {
     <Box
       className={classes.product}
       key={product.index}
-      onClick={handleproductShockClick}
+      onClick={onClickProduct}
     >
       <ProductThumbnail product={product} />
       <Typography component="p" className={classes.name}>
