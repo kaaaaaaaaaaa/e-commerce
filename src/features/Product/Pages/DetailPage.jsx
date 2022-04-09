@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Box,
@@ -26,6 +26,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from 'features/Cart/CartSlice';
 import { useSnackbar } from 'notistack';
 import { cartItemsSlector } from 'features/Cart/selectors';
+import { PREVIEWIMAGES } from '../../../constants/index.js';
 
 DetailPage.propTypes = {};
 
@@ -54,10 +55,20 @@ const useStyles = makeStyles((theme) => ({
 
     minHeight: '200px',
   },
+  previewImage: {
+    display: 'flex',
+    alignItem: 'center',
+    justifyContent: 'center',
+    '&> img': {
+      width: '64px',
+    },
+  },
 }));
 
 function DetailPage(props) {
   const classes = useStyles();
+  console.log(PREVIEWIMAGES);
+  const [previewImages, setPreviewImages] = useState(PREVIEWIMAGES);
 
   const {
     params: { productId },
@@ -110,7 +121,10 @@ function DetailPage(props) {
         <Paper elevation={0}>
           <Grid container>
             <Grid item className={classes.left}>
-              <ProductThumbnail product={product} />
+              <ProductThumbnail
+                previewImage={previewImages}
+                product={product}
+              />
             </Grid>
             <Grid item className={classes.right}>
               <ProductInfo product={product} />
