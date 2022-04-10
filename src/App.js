@@ -19,6 +19,7 @@ import {
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
+import Footer from 'components/Footer';
 
 const useStyles = makeStyles((theme) => ({
   // hide tool back To Top
@@ -108,6 +109,7 @@ function App(props) {
 
           <Route path="/" exact component={MainPage}></Route>
         </Switch>
+        <Footer />
       </div>
     </ThemeProvider>
   );
