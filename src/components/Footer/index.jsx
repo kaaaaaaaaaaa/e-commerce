@@ -9,8 +9,8 @@ Footer.propTypes = {};
 
 function Footer(props) {
   return (
-    <footer style={{ marginTop: '2rem' }}>
-      <Paper px={{ xs: 3, sm: 10 }} py={{ xs: 5, sm: 10 }}>
+    <footer className="footer" style={{ marginTop: '2rem' }}>
+      <Paper className="" px={{ xs: 3, sm: 10 }} py={{ xs: 5, sm: 10 }}>
         <Container maxWidth="lg">
           <Grid container spacing={5}>
             <Grid item xs={12} sm={4}>

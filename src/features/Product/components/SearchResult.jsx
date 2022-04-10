@@ -7,6 +7,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import productApi from 'api/productApi';
+import NotFound from 'components/NotFound';
 import ProductItem from 'components/Product/ProductItem';
 import queryString from 'query-string';
 import { useEffect, useState } from 'react';
@@ -81,7 +82,7 @@ function SearchResult(props) {
             Kết quả tìm kiếm với '{value}' :
           </Typography>
           {searchedProduct.length <= 0 ? (
-            <Typography>không tìm thấy sản phẩm nào</Typography>
+            <NotFound />
           ) : (
             <Box>
               <Typography>

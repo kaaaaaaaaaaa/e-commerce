@@ -5,6 +5,7 @@ import { useRouteMatch } from 'react-router-dom';
 import ListPage from './Pages/ListPage';
 import DetailPage from './Pages/DetailPage';
 import HotDealPage from '../DealShock/Pages/HotDealPage';
+import NotFound from 'components/NotFound';
 
 function ProductFeature(props) {
   const match = useRouteMatch();

@@ -27,6 +27,7 @@ import { addToCart } from 'features/Cart/CartSlice';
 import { useSnackbar } from 'notistack';
 import { cartItemsSlector } from 'features/Cart/selectors';
 import { PREVIEWIMAGES } from '../../../constants/index.js';
+import NotFound from 'components/NotFound';
 
 DetailPage.propTypes = {};
 
@@ -85,6 +86,8 @@ function DetailPage(props) {
   // console.log(productInCart);
 
   const { product, loading } = useProductDetail(productId);
+  console.log(product);
+
   if (loading) {
     return (
       <Box className={classes.loading}>
@@ -92,6 +95,9 @@ function DetailPage(props) {
       </Box>
     );
   }
+  // check product exits ?
+  if (Object.keys(product).length <= 0) return <NotFound />;
+  //
 
   const handleAddToCartSubmit = ({ quantity }) => {
     console.log('from add to cart submit');

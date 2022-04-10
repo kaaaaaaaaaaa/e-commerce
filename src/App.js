@@ -20,6 +20,7 @@ import {
 import PropTypes from 'prop-types';
 import ExpandLessIcon from '@material-ui/icons/ExpandLess';
 import Footer from 'components/Footer';
+import NotFound from 'components/NotFound';
 
 const useStyles = makeStyles((theme) => ({
   // hide tool back To Top
@@ -108,6 +109,7 @@ function App(props) {
           <Route path="/search=:value" component={SearchResult} />
 
           <Route path="/" exact component={MainPage}></Route>
+          <Route component={NotFound} />
         </Switch>
         <Footer />
       </div>

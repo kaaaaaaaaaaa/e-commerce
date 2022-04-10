@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
   boxShownoti: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
+    minHeight: '50vh',
   },
 }));
 
