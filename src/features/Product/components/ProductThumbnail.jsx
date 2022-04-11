@@ -75,8 +75,7 @@ function ProductThumbnail({ product, previewImage = [] }) {
   //
 
   //get 5 item of previewImage array
-  const slicedPreviewImages = previewImage.slice(0, 6);
-  // console.log(slicedPreviewImages);
+  // const slicedPreviewImages = previewImage.slice(0, 6);
 
   const handlePreviewImageClick = (e, image) => {
     // console.log(image.url);
@@ -98,25 +97,27 @@ function ProductThumbnail({ product, previewImage = [] }) {
       </Zoom> */}
       <img src={thumbnailUrl} alt={product.name} width="100%" />
       <Box className={classes.previewImage}>
-        {/* {slicedPreviewImages.length >= 6 && (
+        {previewImage.slice(0, 6).length >= 6 && (
           <Box
             dangerouslySetInnerHTML={{
               __html:
                 '<p style="position: absolute;z-index: 1;height: 64px;top: 0;left: 85%;font-size: 12px;color: #fff;margin: 0!important;text-align: center;display: flex;align-items: center;">More Images</p>',
             }}
           ></Box>
-        )} */}
+        )}
         {previewImage.length > 0 &&
-          slicedPreviewImages.map((image) => (
-            <img
-              className={image.id === 6 ? `${classes.moreImages}` : ''}
-              key={image.id}
-              src={image.url}
-              alt={image.name}
-              width="100%"
-              onClick={(e) => handlePreviewImageClick(e, image)}
-            />
-          ))}
+          previewImage
+            .slice(0, 6)
+            .map((image) => (
+              <img
+                className={image.id === 6 ? `${classes.moreImages}` : ''}
+                key={image.id}
+                src={image.url}
+                alt={image.name}
+                width="100%"
+                onClick={(e) => handlePreviewImageClick(e, image)}
+              />
+            ))}
       </Box>
       {previewImage.length > 0 && (
         <Box className={classes.bottomBox}>

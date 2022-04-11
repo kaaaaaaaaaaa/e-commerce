@@ -18,6 +18,7 @@ SearchResult.propTypes = {};
 const useStyles = makeStyles((theme) => ({
   root: {
     // margin: theme.spacing(1, 0),
+    minHeight: '56vh',
   },
   title: { fontWeight: 'bold', padding: theme.spacing(1) },
   container: {
@@ -73,6 +74,10 @@ function SearchResult(props) {
     })();
   }, [value]);
 
+  const handleProductClick = (product) => {
+    history.push(`/products/${product.id}`);
+  };
+
   return (
     <Container className={classes.root}>
       {loading && <ProductSkeletonList length={searchedProduct.length} />}
@@ -98,7 +103,10 @@ function SearchResult(props) {
               <Grid container>
                 {searchedProduct.map((product) => (
                   <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
-                    <ProductItem product={product} />
+                    <ProductItem
+                      product={product}
+                      handleItemClick={handleProductClick}
+                    />
                   </Grid>
                 ))}
               </Grid>

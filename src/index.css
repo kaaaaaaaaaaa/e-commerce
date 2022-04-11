@@ -41,3 +41,7 @@ code {
         min-height: 0px !important;
     } */
 }
+
+.MuiContainer-root {
+    /* min-height: 54vh */
+}

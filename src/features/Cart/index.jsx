@@ -19,6 +19,9 @@ import { useHistory } from 'react-router-dom';
 
 CartFeature.propTypes = {};
 const useStyles = makeStyles((theme) => ({
+  container: {
+    minHeight: '54vh',
+  },
   root: {
     display: 'flex',
     alignItems: 'flex-start !important',
@@ -28,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
   boxShownoti: {
     margin: theme.spacing(2),
     padding: theme.spacing(2),
-    minHeight: '50vh',
   },
 }));
 
@@ -41,7 +43,7 @@ function CartFeature(props) {
     history.push('/products');
   };
   return (
-    <Container>
+    <Container className={classes.container}>
       {cartItems.length <= 0 && (
         <Paper lg={12} className={classes.boxShownoti}>
           <Typography style={{ margin: '10px 0' }}>
